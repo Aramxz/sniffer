@@ -3,24 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LILYGO Wireless Intelligence Scanner | Monitoreo Inalámbrico Portátil ESP32</title>
-  <meta name="description" content="Plataforma portátil y autónoma basada en ESP32 para monitoreo inalámbrico, detección de BLE/Tags y geolocalización de ciberseguridad en tiempo real.">
+  <title>LILYGO Sentinel-32 | Escáner Táctico de Privacidad y Anti-Espionaje</title>
+  <meta name="description" content="El primer dispositivo físico portátil para blindar tu privacidad. Detecta AirTags y rastreadores GPS de stalking, localiza cámaras espía ocultas y audita redes WiFi sospechosas de manera local y air-gapped.">
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <!-- CSS Stylesheet (Bypass Browser Cache) -->
-  <!-- Vercel Production Trigger v3.1 -->
-  <link rel="stylesheet" href="styles.css?v=3.1">
+  <link rel="stylesheet" href="styles.css?v=3.2">
 </head>
 <body class="loading-locked">
 
   <!-- Ultra-Premium Monochromatic Preloader -->
   <div id="preloader">
     <div class="preloader-content">
-      <div class="preloader-badge font-mono">SYSTEM INITIALIZATION ACTIVE</div>
-      <h1 class="preloader-title" id="preloader-text">Sniffer portátil Aram González</h1>
+      <div class="preloader-badge font-mono">CARGANDO PROYECTO</div>
+      <h1 class="preloader-title" id="preloader-text">Aram González | ESP32 Sniffer</h1>
       <div class="preloader-bar-wrap">
         <div class="preloader-bar"></div>
       </div>
@@ -30,28 +29,15 @@
   <!-- HUD Header -->
   <header id="hud-header">
     <div class="hud-logo">
-      <span class="logo-icon">📡</span>
-      <span class="logo-text">LILYGO <span class="logo-sub">W.I.S.</span></span>
+      <span class="logo-text">Aram <span style="font-weight: 300; opacity: 0.75;">González</span></span>
     </div>
     
-    <div class="hud-status-bar">
-      <div class="hud-stat-item">
-        <span class="hud-dot pulsing-green"></span>
-        <span class="hud-label">SYSTEM_OK</span>
-      </div>
-      <div class="hud-stat-item hide-mobile">
-        <span class="hud-label-dim">NET:</span>
-        <span class="hud-value font-mono">LOCAL_AP</span>
-      </div>
-      <div class="hud-stat-item hide-mobile">
-        <span class="hud-label-dim">GPS:</span>
-        <span class="hud-value font-mono blinking-text">3D_LOCK</span>
-      </div>
-      <div class="hud-stat-item">
-        <span class="hud-label-dim">BATT:</span>
-        <span class="hud-value font-mono">98%</span>
-      </div>
-    </div>
+    <nav class="hud-nav hide-mobile">
+      <a href="#hero-section" class="nav-link">Inicio</a>
+      <a href="#anatomy-section" class="nav-link">Ingeniería</a>
+      <a href="#features-section" class="nav-link">Vectores</a>
+      <a href="#simulator-section" class="nav-link">Simulador</a>
+    </nav>
 
     <div class="hud-actions">
       <a href="#invest-section" class="hud-btn glow-border">SOLICITAR KIT</a>
@@ -63,33 +49,33 @@
     <div class="hero-container">
       <div class="hero-content">
         <div class="badge-investor">
-          <span class="badge-dot"></span> SISTEMA PORTÁTIL AUTÓNOMO • AUDITORÍA DE REDES
+          <span class="badge-dot"></span> BLINDAJE DE PRIVACIDAD PORTÁTIL • AIR-GAPPED
         </div>
         <h1 class="hero-title">
-          La Seguridad Inalámbrica <br>
-          <span class="gradient-text">En la Palma de tu Mano</span>
+          Tu Privacidad Inalámbrica, <br>
+          <span class="gradient-text">Totalmente Protegida</span>
         </h1>
         <p class="hero-description">
-          <strong>LILYGO Wireless Intelligence Scanner</strong> es una plataforma portátil de monitoreo inalámbrico basada en ESP32 diseñada para detectar actividad WiFi y Bluetooth en tiempo real. El sistema combina análisis de tráfico WiFi, detección de dispositivos BLE sospechosos y geolocalización GPS en una sola interfaz ligera y accesible mediante WiFi local.
+          El <strong>LILYGO Sentinel-32</strong> es un escudo físico de ciberseguridad portátil diseñado para proteger tu privacidad. Escanea pasivamente el espectro inalámbrico para detectar rastreadores ocultos (como AirTags u otros tags BLE), localizar micrófonos y cámaras espía WiFi, y alertarte sobre puntos de acceso falsos creados para robar tus datos. Todo ejecutado de forma local, 100% segura y privada.
         </p>
         
         <div class="hero-buttons">
-          <a href="#simulator-section" class="btn btn-primary btn-glow">PROBAR SIMULADOR</a>
-          <a href="#anatomy-section" class="btn btn-secondary">VER HARDWARE</a>
+          <a href="#simulator-section" class="btn btn-primary btn-glow">PROBAR ESCÁNER</a>
+          <a href="#anatomy-section" class="btn btn-secondary">INGENIERÍA TÁCTICA</a>
         </div>
 
         <div class="hero-metrics">
           <div class="metric-card">
-            <span class="metric-num">520 KB</span>
-            <span class="metric-lbl">Memoria SRAM</span>
+            <span class="metric-num">100%</span>
+            <span class="metric-lbl">LOCAL & AIR-GAPPED</span>
           </div>
           <div class="metric-card">
-            <span class="metric-num">240 MHz</span>
-            <span class="metric-lbl">Dual-Core Xtensa LX6</span>
+            <span class="metric-num">RF</span>
+            <span class="metric-lbl">MONITOR PASIVO 2.4G</span>
           </div>
           <div class="metric-card">
-            <span class="metric-num">128x64 px</span>
-            <span class="metric-lbl">Pantalla OLED SSD1306</span>
+            <span class="metric-num">BLE</span>
+            <span class="metric-lbl">ANTI-STALKING HEURÍSTICO</span>
           </div>
         </div>
       </div>
@@ -262,9 +248,9 @@
   <!-- Sticky Interactive Anatomy Exploded Section -->
   <section id="anatomy-section">
     <div class="section-title-wrap">
-      <h2 class="section-subtitle">INGENIERÍA AVANZADA</h2>
-      <h2 class="section-title">Anatomía del Dispositivo</h2>
-      <p class="section-lead">Desmontamos el hardware para mostrarte cómo se integran el microprocesador, la pantalla y los sensores en un diseño ultra-compacto y eficiente. Desplázate para ver cada capa tecnológica.</p>
+      <h2 class="section-subtitle">INGENIERÍA E INTEGRACIÓN</h2>
+      <h2 class="section-title">Anatomía del Hardware</h2>
+      <p class="section-lead">Desmontamos el hardware del Sentinel-32 para mostrarte cómo se integran la antena de captura pasiva, la pantalla de telemetría y el microprocesador en un diseño ultra-compacto de bolsillo. Desplázate para inspeccionar cada capa.</p>
     </div>
 
     <div class="anatomy-container">
@@ -347,70 +333,70 @@
         <!-- Step 1: Base PCB -->
         <div class="anatomy-step" id="step-pcb">
           <div class="step-num">01</div>
-          <h3 class="step-title">Placa Base de Fibra de Vidrio Multicapa</h3>
+          <h3 class="step-title">Placa Base de Fibra de Vidrio con Blindaje RF</h3>
           <p class="step-desc">
-            Diseñada en un factor de forma ultra-reducido. Cuenta con pistas de cobre optimizadas para evitar interferencias de radiofrecuencia (RF) y un plano de tierra aislado para lecturas de señal de alta precisión.
+            Diseñada con un plano de tierra aislado que actúa como una mini jaula de Faraday. Esto previene el ruido electromagnético de componentes adyacentes y garantiza que las lecturas y detecciones de radiofrecuencia (RF) del escáner sean de máxima precisión.
           </p>
           <div class="tech-spec-grid">
-            <span class="spec-label">Material:</span><span class="spec-val">FR4 Grado Industrial</span>
+            <span class="spec-label">Material:</span><span class="spec-val">FR4 de Grado Industrial</span>
             <span class="spec-label">Dimensiones:</span><span class="spec-val">65mm x 45mm x 12mm</span>
-            <span class="spec-label">Conexión:</span><span class="spec-val">USB-C Nativo Directo</span>
+            <span class="spec-label">Aislamiento:</span><span class="spec-val">Pistas Blindadas Anti-Interferencia</span>
           </div>
         </div>
 
         <!-- Step 2: SoC ESP32 -->
         <div class="anatomy-step" id="step-soc">
           <div class="step-num">02</div>
-          <h3 class="step-title">Chip SoC ESP32 Dual-Core (Xtensa LX6)</h3>
+          <h3 class="step-title">Procesador de Escaneo Heurístico Dual-Core</h3>
           <p class="step-desc">
-            El cerebro del sistema. Ejecuta simultáneamente dos núcleos Xtensa LX6 de 32 bits a 240 MHz. Integra físicamente las radios de Wi-Fi 802.11 b/g/n y Bluetooth v4.2 BLE en un único silicio de alta eficiencia.
+            El procesador Dual-Core ejecuta en paralelo los motores de heurística de escaneo y decodificación de tramas. Mientras un núcleo analiza el tráfico WiFi en busca de hotspots maliciosos, el otro rastrea el espectro BLE en busca de tags espía.
           </p>
           <div class="tech-spec-grid">
             <span class="spec-label">Procesador:</span><span class="spec-val">Dual-Core Xtensa LX6 @ 240 MHz</span>
-            <span class="spec-label">Memorias:</span><span class="spec-val">520 KB SRAM / 4 MB Flash</span>
-            <span class="spec-label">Radios:</span><span class="spec-val">WiFi 2.4 GHz 802.11 b/g/n + Bluetooth 4.2 BLE</span>
+            <span class="spec-label">Criptografía:</span><span class="spec-val">Aceleradores de hardware AES/SHA</span>
+            <span class="spec-label">Multihilo:</span><span class="spec-val">Monitoreo y filtrado en tiempo real</span>
           </div>
         </div>
 
         <!-- Step 3: OLED SSD1306 Screen -->
         <div class="anatomy-step" id="step-screen">
           <div class="step-num">03</div>
-          <h3 class="step-title">Pantalla OLED SSD1306 (128x64px)</h3>
+          <h3 class="step-title">Pantalla Táctica OLED de Telemetría Táctica</h3>
           <p class="step-desc">
-            Interfaz gráfica de ultra-bajo consumo integrada en el hardware. Conectada directamente a través del bus I2C en los puertos de datos IO21 (SDA) e IO22 (SCL). Proporciona telemetría inalámbrica y estados del sistema en tiempo real.
+            Interfaz integrada para operación de emergencia en campo. Proporciona telemetría directa con alertas de riesgo de stalking visuales e intensidad de señal (RSSI) en tiempo real, lo que permite operar de forma 100% independiente del celular.
           </p>
           <div class="tech-spec-grid">
-            <span class="spec-label">Tecnología:</span><span class="spec-val">OLED Monocromática</span>
-            <span class="spec-label">Resolución:</span><span class="spec-val">128 x 64 píxeles</span>
-            <span class="spec-label">Conexión:</span><span class="spec-val">I2C (SDA: IO21 / SCL: IO22)</span>
+            <span class="spec-label">Tecnología:</span><span class="spec-val">OLED de Alto Contraste</span>
+            <span class="spec-label">Resolución:</span><span class="spec-val">128 x 64 píxeles tácticos</span>
+            <span class="spec-label">Lecturas:</span><span class="spec-val">Indicador RSSI y Código de Amenazas</span>
           </div>
         </div>
 
         <!-- Step 4: GPS Module UART -->
         <div class="anatomy-step" id="step-gps">
           <div class="step-num">04</div>
-          <h3 class="step-title">Geolocalización GPS por UART</h3>
+          <h3 class="step-title">Registro Satelital GPS / Forense</h3>
           <p class="step-desc">
-            Módulo receptor satelital de alta ganancia conectado físicamente a la interfaz UART del ESP32 a través de los pines IO13 (RX) e IO12 (TX). Permite georreferenciar incidentes WiFi o BLE en tiempo real sin requerir internet.
+            Módulo receptor satelital de alta ganancia conectado físicamente al bus UART seguro. Permite georreferenciar incidentes de acoso inalámbrico, registrando las coordenadas exactas de dónde se detectó un rastreador sospechoso.
           </p>
           <div class="tech-spec-grid">
-            <span class="spec-label">Conexión:</span><span class="spec-val">UART (RX: IO13 / TX: IO12)</span>
-            <span class="spec-label">Satelital:</span><span class="spec-val">GPS / GLONASS / Galileo</span>
-            <span class="spec-label">Fijación:</span><span class="spec-val">Antena activa integrada</span>
+            <span class="spec-label">Localización:</span><span class="spec-val">GPS / GLONASS / Galileo</span>
+            <span class="spec-label">Seguridad:</span><span class="spec-val">Conexión UART aislada por hardware</span>
+            <span class="spec-label">Propósito:</span><span class="spec-val">Marcas de ubicación en auditorías forenses</span>
           </div>
         </div>
 
         <!-- Step 5: Power & Management -->
         <div class="anatomy-step" id="step-power">
           <div class="step-num">05</div>
-          <h3 class="step-title">Gestión de Energía Eficiente</h3>
+          <h3 class="step-title">Operación Air-Gapped y Autonomía Total</h3>
           <p class="step-desc">
-            Circuito de alimentación optimizado para despliegues portátiles en campo. Regula dinámicamente los voltajes de los núcleos del procesador Xtensa, de los sensores y las radios inalámbricas, asegurando un consumo mínimo de batería.
+            Diseñado bajo un estricto principio de "Aislamiento de Red" (Air-Gapped). Al funcionar localmente sin internet, no hay riesgo de interceptación o subida de datos del escaneo al cloud. Opera por horas gracias a su consumo mínimo de batería.
           </p>
           <div class="tech-spec-grid">
-            <span class="spec-label">Alimentación:</span><span class="spec-val">5V por USB-C o LiPo</span>
-            <span class="spec-label">Consumo Típico:</span><span class="spec-val">Menos de 85mA (Ahorro Activo)</span>
-            <span class="spec-label">Portabilidad:</span><span class="spec-val">Operación autónoma</span>
+            <span class="spec-label">Alimentación:</span><span class="spec-val">USB-C de carga o Batería LiPo</span>
+            <span class="spec-label">Consumo:</span><span class="spec-val">Menor a 85mA en modo continuo</span>
+            <span class="spec-label">Privacidad:</span><span class="spec-val">100% Local, Cifrado en chip</span>
           </div>
         </div>
       </div>
@@ -420,30 +406,30 @@
   <!-- Deep-Tech Features Section -->
   <section id="features-section">
     <div class="section-title-wrap text-center">
-      <h2 class="section-subtitle">PODER INALÁMBRICO PASIVO</h2>
-      <h2 class="section-title">Funcionalidades del Sistema</h2>
-      <p class="section-lead max-w-600">Tres vectores de análisis técnicos integrados de manera lineal y compacta para ofrecer un diagnóstico de seguridad total.</p>
+      <h2 class="section-subtitle">BLINDAJE ELECTROMAGNÉTICO PASIVO</h2>
+      <h2 class="section-title">Vectores de Protección de Privacidad</h2>
+      <p class="section-lead max-w-600">Tres tecnologías de escaneo e identificación de amenazas integradas de forma 100% autónoma en el dispositivo.</p>
     </div>
 
     <div class="features-linear-list">
       <!-- Feature 1: WiFi Sniffer with simulated console -->
       <div class="feature-row animate-on-scroll">
         <div class="feature-icon-wrap">
-          <span class="feature-icon">📡</span>
+          <span class="feature-icon">🛡️</span>
         </div>
-        <h3 class="feature-title">Sniffer WiFi Inteligente</h3>
+        <h3 class="feature-title">Auditoría WiFi y Detección de Redes Falsas</h3>
         <p class="feature-text">
-          Detecta actividad inalámbrica en el espectro de 2.4 GHz cercana en tiempo real. Analiza de manera pasiva Probe Requests y Beacons para identificar qué dispositivos están buscando redes WiFi. Muestra MACs activas, canal, potencia de señal (RSSI) y detecta actividad persistente o anómala.
+          Monitorea pasivamente el espectro de 2.4 GHz en busca de hotspots maliciosos ("Evil Twins") y ataques de deautenticación. Analiza Probe Requests para identificar qué dispositivos están buscando conectarse y detecta actividades inalámbricas sospechosas en tiempo real.
         </p>
         
         <!-- Live Terminal Simulation inside card -->
         <div class="terminal-container">
           <div class="terminal-header">
-            <span class="term-title">wifi_sniffer.py</span>
-            <span class="term-badge">PASSIVE MONITOR</span>
+            <span class="term-title">wifi_defense_scanner.py</span>
+            <span class="term-badge">MONITOR PASIVO ACTIVO</span>
           </div>
           <div class="terminal-body" id="wifi-terminal">
-            <div class="term-line output-cyan">[INFO] Inicializando interface WiFi en modo Monitor...</div>
+            <div class="term-line output-cyan">[INFO] Inicializando interface WiFi en modo Monitor pasivo...</div>
             <div class="term-line output-green">[OK] Canal 6 activo. Escaneando ondas electromagnéticas...</div>
             <div class="term-line"><span class="output-dim">10:42:01</span> <span class="output-magenta">PROBE_REQ</span> MAC: <span class="output-white">a4:7b:2c:19:d0:43</span> RSSI: <span class="output-cyan">-68dBm</span> SSID: "Home_WiFi"</div>
             <div class="term-line"><span class="output-dim">10:42:04</span> <span class="output-yellow">BEACON</span> MAC: <span class="output-white">c8:d7:19:a3:bf:02</span> RSSI: <span class="output-green">-45dBm</span> CH: 6 SSID: "Net_Office_5"</div>
@@ -456,9 +442,9 @@
         <div class="feature-icon-wrap">
           <span class="feature-icon">🔎</span>
         </div>
-        <h3 class="feature-title">Detección BLE / Posibles Tags</h3>
+        <h3 class="feature-title">Escáner Anti-Stalking (Rastreadores BLE)</h3>
         <p class="feature-text">
-          Escanea dispositivos Bluetooth Low Energy cercanos. Detecta rastreadores sin nombre o con patrones similares a trackers y localizadores (tags). Monitorea de cerca la intensidad de su señal y persistencia, y genera alertas visuales de riesgo ante posibles seguimientos.
+          Escanea y filtra dispositivos Bluetooth Low Energy (BLE) a tu alrededor. Mediante un motor de análisis de persistencia, detecta localizadores ocultos (como AirTags, SmartTags o Tiles) que viajen contigo para alertarte antes de que tu ubicación se vea comprometida.
         </p>
 
         <!-- Dynamic BLE Radar simulator -->
@@ -478,7 +464,7 @@
             <div class="radar-center"></div>
           </div>
           <div class="radar-legend">
-            1x BLE TRACKER SOSPECHOSO (AirTag) • 1x Smartwatch Genérico (Seguro)
+            1x RASTREADOR SOSPECHOSO (AirTag) • 1x Dispositivo Seguro
           </div>
         </div>
       </div>
@@ -488,9 +474,9 @@
         <div class="feature-icon-wrap">
           <span class="feature-icon">📍</span>
         </div>
-        <h3 class="feature-title">Integración GPS</h3>
+        <h3 class="feature-title">Mapeo Satelital de Coordenadas de Amenaza</h3>
         <p class="feature-text">
-          Obtiene coordenadas satelitales en tiempo real de manera autónoma. Permite registrar con precisión las ubicaciones geográficas exactas donde se detectó actividad sospechosa y exportar registros compatibles con Google Maps para auditorías forenses.
+          Obtiene coordenadas de alta precisión del receptor satelital de forma local. Mapea la ubicación exacta donde se registraron transmisiones sospechosas o de acoso inalámbrico, permitiendo realizar auditorías forenses con marcas temporales.
         </p>
 
         <!-- Simulated Tactical Map HUD -->
@@ -514,21 +500,13 @@
     </div>
   </section>
 
-  <!-- Interactive Live Simulator Section (Smartphone Demo) -->
-  <section id="simulator-section">
-    <div class="section-title-wrap text-center">
-      <h2 class="section-subtitle">INTERFAZ DE USUARIO INTEGRADA</h2>
-      <h2 class="section-title">Experimenta la Consola en Vivo</h2>
-      <p class="section-lead max-w-600">Simulación del portal cautivo integrado en el hardware LILYGO. El dispositivo genera su propia red local WiFi para que lo operes desde cualquier celular.</p>
-    </div>
-
   <!-- Interactive Live Simulator Section (Smartphone Unified Demo) -->
   <section id="simulator-section">
     <div class="simulator-showcase-container">
       <div class="section-title-wrap text-center">
-        <h2 class="section-subtitle">INTERFAZ DE USUARIO INTEGRADA</h2>
-        <h2 class="section-title">Experimenta la Consola en Vivo</h2>
-        <p class="section-lead max-w-600">Simulación de la consola en tiempo real integrada en el hardware. El dispositivo genera su propia red local WiFi para que lo operes desde cualquier celular o laptop sin internet.</p>
+        <h2 class="section-subtitle">INTERFAZ TÁCTICA EN VIVO</h2>
+        <h2 class="section-title">Explora el Panel de Control</h2>
+        <p class="section-lead max-w-600">Simulación interactiva de la consola local del Sentinel-32. El dispositivo genera su propia red local WiFi segura cifrada para que audites tu entorno desde cualquier celular sin internet.</p>
       </div>
 
       <!-- Pristine Smartphone Mockup Centered -->
@@ -538,7 +516,7 @@
           <div class="phone-hud-bar">
             <span class="phone-time">10:42 AM</span>
             <div class="phone-icons">
-              <span>📶 ESP32_AP</span>
+              <span>📶 SENTINEL_SECURE_AP</span>
               <span>🔋 98%</span>
             </div>
           </div>
@@ -547,7 +525,7 @@
           <div class="phone-dashboard">
             <!-- Dashboard Header -->
             <div class="dash-header">
-              <div class="dash-logo">📡 LILYGO SCANNER</div>
+              <div class="dash-logo">🛡️ SENTINEL SCANNER</div>
               <div class="dash-status-dot pulsing-green"></div>
             </div>
 
@@ -556,17 +534,17 @@
               
               <!-- Redes WiFi -->
               <div class="pane-headline">
-                <span>📡 Redes WiFi Cercanas</span>
-                <span class="pane-badge font-mono">MONITOR_ON</span>
+                <span>📡 Redes WiFi en el Entorno</span>
+                <span class="pane-badge font-mono">SCAN_PASSIVE</span>
               </div>
               <div class="wifi-list-simulation">
                 <div class="wifi-item">
                   <div class="wifi-meta">
-                    <span class="wifi-ssid font-mono">Guest_Corporate_HQ</span>
+                    <span class="wifi-ssid font-mono">Rogue_EvilTwin_FreeWiFi</span>
                     <span class="wifi-mac font-mono">1C:2B:A2:3E:44:0B</span>
                   </div>
                   <div class="wifi-signal">
-                    <span class="wifi-rssi font-mono">-42dBm</span>
+                    <span class="wifi-rssi font-mono" style="color: var(--accent-red)">⚠️ ALTA</span>
                   </div>
                 </div>
                 <div class="wifi-item">
@@ -582,14 +560,14 @@
 
               <!-- Bluetooth Low Energy -->
               <div class="pane-headline">
-                <span>🔎 Bluetooth Low Energy</span>
-                <span class="pane-badge font-mono">HEURÍSTICAS BLE</span>
+                <span>🔎 Anti-Stalking / Amenazas BLE</span>
+                <span class="pane-badge font-mono">HEURÍSTICA ACTIVA</span>
               </div>
               <div class="ble-list-simulation">
                 <div class="ble-item tracking-risk">
                   <div class="ble-meta">
-                    <span class="ble-name font-mono">⚠️ TRACKER DETECTADO (AirTag)</span>
-                    <span class="ble-mac font-mono">Persistencia: 94% | RSSI: -42dBm</span>
+                    <span class="ble-name font-mono">⚠️ AirTag Sospechoso Detectado</span>
+                    <span class="ble-mac font-mono">Persistencia: 94% | Proximidad: 2m</span>
                   </div>
                   <div class="ble-signal">
                     <span class="ble-rssi font-mono text-danger">RIESGO</span>
@@ -599,8 +577,8 @@
 
               <!-- GPS Lock -->
               <div class="pane-headline">
-                <span>📍 Ubicación GPS Satelital</span>
-                <span class="pane-badge font-mono">LOCK_ON</span>
+                <span>📍 Ubicación de Incidentes GPS</span>
+                <span class="pane-badge font-mono">3D_LOCK_ON</span>
               </div>
               <div class="gps-data-box font-mono">
                 <div>LAT: 40.7128N</div>
@@ -609,33 +587,33 @@
 
               <!-- System stats log console -->
               <div class="pane-headline">
-                <span>⚡ Bitácora de Parámetros</span>
+                <span>⚡ Estado del Escudo de Privacidad</span>
               </div>
               <div class="sys-metrics-simulation font-mono">
                 <div class="sys-row">
-                  <span>CPU:</span><span class="text-cyan">ESP32 Xtensa LX6 (240MHz)</span>
+                  <span>PROCESADOR:</span><span class="text-cyan">Dual Xtensa Cripto</span>
                 </div>
                 <div class="sys-row">
-                  <span>SRAM TOTAL:</span><span class="text-green">520 KB</span>
+                  <span>MOTOR HEURÍSTICO:</span><span class="text-green">ACTIVO</span>
                 </div>
                 <div class="sys-row">
-                  <span>FLASH SPI:</span><span class="text-green">4 MB</span>
+                  <span>MODO OPERATIVO:</span><span class="text-green">AIR-GAPPED (100% Local)</span>
                 </div>
                 <div class="sys-row">
-                  <span>OLED:</span><span class="text-cyan">SSD1306 128x64 (I2C)</span>
+                  <span>RF FRONT-END:</span><span class="text-cyan">PASIVO 2.4 GHz</span>
                 </div>
                 <div class="sys-row">
-                  <span>GPS UART:</span><span class="text-cyan">ACTIVE (IO13/IO12)</span>
+                  <span>GPS UART:</span><span class="text-cyan">SECURE_UART (ACTIVE)</span>
                 </div>
               </div>
 
               <div class="sys-console-output font-mono" id="sys-console">
-                [SYS] ESP32 Xtensa LX6 Dual-Core OK. <br>
-                [SYS] OLED SSD1306 I2C (SDA:21/SCL:22) OK. <br>
-                [SYS] GPS UART (RX:13/TX:12) Lock Active.
+                [SEC] Motor de heurística de amenazas activo. <br>
+                [SEC] Escáner pasivo BLE cargado (modo anti-stalking sigiloso). <br>
+                [SEC] Mapeo de incidentes GPS habilitado (Secure_3D).
               </div>
 
-              <button class="btn-action-sim font-mono" id="btn-ble-alert">FORZAR ALERTA DE SEGUIMIENTO</button>
+              <button class="btn-action-sim font-mono" id="btn-ble-alert">SIMULAR ALERTA DE STALKING</button>
 
             </div>
           </div>
@@ -648,39 +626,39 @@
   <!-- Ecosistema y Robustez Técnica (Linear Showcase) -->
   <section id="pitch-section">
     <div class="section-title-wrap text-center">
-      <h2 class="section-subtitle">PLATAFORMA INTEGRADA Y PRIVADA</h2>
-      <h2 class="section-title">Ecosistema de Monitoreo Portátil</h2>
-      <p class="section-lead max-w-600">Un diseño de ciberseguridad inalámbrica sin cables, sin dependencias y de alta eficiencia energética.</p>
+      <h2 class="section-subtitle">PLATAFORMA 100% AUTÓNOMA</h2>
+      <h2 class="section-title">Blindaje de Privacidad Descentralizado</h2>
+      <p class="section-lead max-w-600">Un diseño táctico que prioriza tu anonimato absoluto. Operación local sin servidores centrales ni almacenamiento de telemetría.</p>
     </div>
 
     <div class="ecosystem-linear-list">
       <div class="ecosystem-row animate-on-scroll">
         <div class="pitch-header">
           <span class="pitch-icon">📱</span>
-          <h3>Interfaz Web Integrada</h3>
+          <h3>Acceso Local y Air-Gapped</h3>
         </div>
         <p class="pitch-desc">
-          El escáner genera su propia red WiFi local segura (Access Point). Conéctate desde cualquier celular, tablet o laptop para abrir una interfaz responsiva y completa en tiempo real. No requiere descargas de aplicaciones ni internet.
+          El Sentinel-32 genera su propia red local WiFi segura. Conéctate de forma directa desde tu celular o laptop para visualizar las amenazas en tiempo real a través del portal cautivo. No requiere internet, cuentas, ni aplicaciones externas.
         </p>
       </div>
 
       <div class="ecosystem-row animate-on-scroll">
         <div class="pitch-header">
           <span class="pitch-icon">⚡</span>
-          <h3>Arquitectura Ligera</h3>
+          <h3>Firmware Hardened Blindado</h3>
         </div>
         <p class="pitch-desc">
-          El firmware está optimizado al extremo para hardware embebido de bajo consumo. Ejecuta múltiples hilos de escaneo en los dos núcleos del ESP32 con un uso mínimo de memoria interna y sin fugas de rendimiento.
+          El código interno está diseñado bajo principios estrictos de seguridad. Sin pila de protocolos de internet innecesaria y con análisis de paquetes WiFi y tramas BLE en tiempo real en los núcleos de hardware, es inmune a intrusiones externas.
         </p>
       </div>
 
       <div class="ecosystem-row animate-on-scroll">
         <div class="pitch-header">
           <span class="pitch-icon">🔋</span>
-          <h3>Monitoreo Autónomo</h3>
+          <h3>Portabilidad Táctica en Campo</h3>
         </div>
         <p class="pitch-desc">
-          Portabilidad total diseñada para auditoría y hacking ético en campo. Con un consumo eléctrico menor a 85mA, el dispositivo puede operar durante horas alimentado por una pequeña batería LiPo o por su puerto USB-C.
+          Llévalo contigo discretamente a hoteles, oficinas o en tu vehículo. Con un consumo energético ínfimo (menor a 85mA), funciona de manera autónoma conectado a una pequeña batería LiPo interna o a través de su puerto de carga rápida USB-C.
         </p>
       </div>
     </div>
@@ -689,15 +667,15 @@
     <div class="investment-stats-banner">
       <div class="stat-banner-card animate-on-scroll">
         <span class="banner-num" id="count-cost" data-val="520">520 KB</span>
-        <span class="banner-lbl">Memoria SRAM Total</span>
+        <span class="banner-lbl">Micro Criptográfico SRAM</span>
       </div>
       <div class="stat-banner-card animate-on-scroll">
         <span class="banner-num" id="count-roi" data-val="240">240 MHz</span>
-        <span class="banner-lbl">Frecuencia del Procesador Xtensa</span>
+        <span class="banner-lbl">Frecuencia Xtensa Core</span>
       </div>
       <div class="stat-banner-card animate-on-scroll">
         <span class="banner-num" id="count-market" data-val="4">4 MB</span>
-        <span class="banner-lbl">Memoria Flash de Almacenamiento</span>
+        <span class="banner-lbl">Almacenamiento Local Cifrado</span>
       </div>
     </div>
   </section>
@@ -706,22 +684,22 @@
   <section id="invest-section">
     <div class="invest-form-container">
       <div class="badge-investor" style="align-self: center; margin-bottom: 1.5rem;">
-        <span class="badge-dot pulsing-green"></span> ADQUIRIR SCANNER / SOLICITAR INFORMACIÓN
+        <span class="badge-dot pulsing-green"></span> RESERVAR SENTINEL-32 / ADQUIRIR FIRMWARE
       </div>
-      <h2 class="form-title text-center">Obtén tu LILYGO Wireless Scanner</h2>
+      <h2 class="form-title text-center">Protege tu Privacidad Hoy Mismo</h2>
       <p class="form-lead text-center">
-        ¿Eres profesional de la ciberseguridad, hacker ético, auditor de sistemas o entusiasta del hardware? Completa el formulario para recibir guías de flasheo de firmware, actualizaciones de bases de datos MAC o solicitar un kit pre-ensamblado.
+        ¿Quieres blindar tu vehículo contra acoso, auditar habitaciones de hotel o flashear tu propio hardware? Completa el formulario para reservar tu kit Sentinel-32 pre-ensamblado o solicitar el firmware hardened y las guías de inicio técnico.
       </p>
 
-      <form id="invest-form" onsubmit="event.preventDefault(); alert('¡Solicitud registrada con éxito! Te enviaremos toda la información técnica, firmware de inicio y catálogo del kit a tu correo electrónico.');">
+      <form id="invest-form" onsubmit="event.preventDefault(); alert('¡Solicitud de reserva registrada con éxito! Te enviaremos el catálogo del kit pre-ensamblado, el firmware hardened y las guías de inicio táctico a tu correo seguro.');">
         <div class="form-row">
           <div class="form-group">
             <label for="invest-name">NOMBRE Y APELLIDO</label>
             <input type="text" id="invest-name" required placeholder="E.g., Samuel Vane">
           </div>
           <div class="form-group">
-            <label for="invest-company">ORGANIZACIÓN / EMPRESA</label>
-            <input type="text" id="invest-company" placeholder="E.g., Pentest Labs">
+            <label for="invest-company">EMPRESA / USO (OPCIONAL)</label>
+            <input type="text" id="invest-company" placeholder="E.g., Auditoría Personal / Pentest Labs">
           </div>
         </div>
 
@@ -737,11 +715,11 @@
         </div>
 
         <div class="form-group">
-          <label for="invest-message">MENSAJE / ÁREA DE INTERÉS</label>
-          <textarea id="invest-message" rows="4" placeholder="Indica brevemente si estás interesado en comprar un kit preensamblado, colaborar en el código del firmware o recibir asistencia técnica..."></textarea>
+          <label for="invest-message">MENSAJE / PREFERENCIA DE ADQUISICIÓN</label>
+          <textarea id="invest-message" rows="4" placeholder="Indica si deseas adquirir el dispositivo físico listo para usar, o si prefieres asistencia para flashear tu propia placa ESP32 con el firmware..."></textarea>
         </div>
 
-        <button type="submit" class="btn btn-primary btn-glow btn-block font-mono" id="btn-submit-pitch">SOLICITAR INFORMACIÓN Y KIT</button>
+        <button type="submit" class="btn btn-primary btn-glow btn-block font-mono" id="btn-submit-pitch">RESERVAR DISPOSITIVO / SOLICITAR KIT</button>
       </form>
     </div>
   </section>
@@ -751,33 +729,32 @@
     <div class="footer-container">
       <div class="footer-left">
         <div class="hud-logo">
-          <span class="logo-icon">📡</span>
-          <span class="logo-text">LILYGO <span class="logo-sub">W.I.S.</span></span>
+          <span class="logo-text">Aram <span style="font-weight: 300; opacity: 0.75;">González</span></span>
         </div>
         <p class="footer-about">
-          Desarrollando herramientas de hardware cognitivo y monitoreo inalámbrico libre, autónomo y accesible para defender la privacidad en el siglo XXI.
+          Desarrollando herramientas de hardware y monitoreo inalámbrico libre, autónomo y accesible para la auditoría de redes y seguridad física en el siglo XXI.
         </p>
       </div>
 
       <div class="footer-right">
         <div class="footer-links">
           <h4>TECNOLOGÍA</h4>
-          <a href="#anatomy-section">Arquitectura ESP32</a>
+          <a href="#anatomy-section">Arquitectura de Hardware</a>
           <a href="#features-section">Vectores de Escaneo</a>
-          <a href="#simulator-section">Simulador Local</a>
+          <a href="#simulator-section">Portal Cautivo</a>
         </div>
         <div class="footer-links">
           <h4>COMUNIDAD</h4>
-          <a href="#invest-section">Solicitar Kit</a>
-          <a href="#">Descargar Firmware</a>
-          <a href="#">Roadmap Técnico</a>
+          <a href="#invest-section">Pre-ordenar Kit</a>
+          <a href="#">Firmware de Inicio</a>
+          <a href="#">Reportes Técnicos</a>
         </div>
       </div>
     </div>
     
     <div class="footer-bottom">
-      <p>&copy; 2026 LILYGO Wireless Intelligence Scanner. Todos los derechos reservados. Diseñado para auditoría y hacking ético autónomo.</p>
-      <div class="footer-security-stamp font-mono">SYS_STATUS: COMPLIANT | ENCRYPTION: ACTIVE</div>
+      <p>&copy; 2026 Aram González. Todos los derechos reservados. Diseñado para auditoría y hacking ético de redes.</p>
+      <div class="footer-security-stamp font-mono">PROYECTO: ESP32 SNIFFER | FIRMWARE v3.2</div>
     </div>
   </footer>
 

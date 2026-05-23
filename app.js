@@ -335,23 +335,23 @@ function initLiveSimulators() {
    4. SMARTPHONE UI SIMULATOR (PORTAL DEMO)
    ========================================================================== */
 function initSmartphoneMockup() {
-  // "Forzar Alerta de Seguimiento" button event
+  // "SIMULAR ALERTA DE STALKING" button event
   const alertBtn = document.getElementById("btn-ble-alert");
   if (alertBtn) {
     alertBtn.addEventListener("click", () => {
       const list = document.querySelector(".ble-list-simulation");
       if (!list) return;
       
-      // Temporary threat addition styled elegantly for the light-silver Apple aesthetic
+      // Temporary threat addition styled elegantly for the cyber dark mode
       const threatHTML = `
-        <div class="ble-item tracking-risk alert-flash" style="background: rgba(239, 68, 68, 0.05); border-left: 2px solid #ef4444; padding: 6px 8px; display: flex; justify-content: space-between; align-items: center;">
+        <div class="ble-item tracking-risk alert-flash" style="background: rgba(255, 59, 48, 0.08); border-left: 3px solid #ff3b30; padding: 6px 8px; display: flex; justify-content: space-between; align-items: center;">
           <div class="ble-meta">
-            <span class="ble-name font-mono" style="font-size: 0.6rem; color: #ef4444; font-weight: 600; display: block;">⚠️ CRITICAL: Apple AirTag</span>
-            <span class="ble-mac font-mono" style="font-size: 0.5rem; color: #86868b;">DISTANCIA ESTIMADA: 2.1m</span>
+            <span class="ble-name font-mono" style="font-size: 0.6rem; color: #ff3b30; font-weight: 700; display: block;">⚠️ CRÍTICO: AirTag Oculto</span>
+            <span class="ble-mac font-mono" style="font-size: 0.5rem; color: #9ba3b0;">DISTANCIA: ~1.5m (Rastreo Continuo)</span>
           </div>
           <div class="ble-signal" style="text-align: right;">
-            <span class="ble-rssi font-mono" style="font-size: 0.55rem; color: #ef4444; font-weight: 700; display: block;">RIESGO 100%</span>
-            <span class="ble-persistence" style="font-size: 0.45rem; color: #ef4444; font-weight: 500;">PULSO CONSTANTE</span>
+            <span class="ble-rssi font-mono" style="font-size: 0.55rem; color: #ff3b30; font-weight: 700; display: block;">PELIGRO</span>
+            <span class="ble-persistence" style="font-size: 0.45rem; color: #ff3b30; font-weight: 500;">CONFIRMADO 98%</span>
           </div>
         </div>
       `;
@@ -361,20 +361,19 @@ function initSmartphoneMockup() {
 
       // Disable button temporarily
       alertBtn.disabled = true;
-      alertBtn.innerText = "¡ALERTA DE SEGUIMIENTO ACTIVADA!";
+      alertBtn.innerText = "¡ALERTA DE STALKING SIMULADA!";
       alertBtn.style.opacity = "0.7";
 
-      // Animate warning flash on the overall phone mockup (sophisticated orange/amber border transition)
       const phone = document.querySelector(".phone-mockup");
       const flashTL = gsap.timeline();
       flashTL
-        .to(phone, { borderColor: "#d97706", duration: 0.3, repeat: 3, yoyo: true })
-        .to(phone, { borderColor: "#d2d2d7", duration: 0.6 });
+        .to(phone, { borderColor: "#ff3b30", duration: 0.3, repeat: 3, yoyo: true })
+        .to(phone, { borderColor: "#e3e3e8", duration: 0.6 });
 
       // Append alert entry in system logs tab (utilizing manufacturer data and signal heuristics)
       const consoleLog = document.getElementById("sys-console");
       if (consoleLog) {
-        consoleLog.insertAdjacentHTML("beforeend", `<br><span class="text-danger" style="color: #ef4444 !important; font-weight: 500;">[ALERT] BLE Heurística: AirTag detectado. RSSI: -42dBm, Persistencia: 94%, Manufacturer Data OK. RIESGO.</span>`);
+        consoleLog.insertAdjacentHTML("beforeend", `<br><span class="text-danger" style="color: #ff3b30 !important; font-weight: 600;">[ALERT] Amenaza BLE: AirTag persistente detectado. RSSI: -42dBm, Confianza: 98%. PELIGRO DE SEGUIMIENTO ACTIVO.</span>`);
         consoleLog.scrollTop = consoleLog.scrollHeight;
       }
 
@@ -389,7 +388,7 @@ function initSmartphoneMockup() {
             onComplete: () => {
               item.remove();
               alertBtn.disabled = false;
-              alertBtn.innerText = "FORZAR ALERTA DE SEGUIMIENTO";
+              alertBtn.innerText = "SIMULAR ALERTA DE STALKING";
               alertBtn.style.opacity = "1";
             }
           });
