@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LILYGO Wireless Intelligence Scanner | Monitoreo Inalámbrico Portátil ESP32</title>
+  <meta name="description" content="Plataforma portátil y autónoma basada en ESP32 para monitoreo inalámbrico, detección de BLE/Tags y geolocalización de ciberseguridad en tiempo real.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- CSS Stylesheet (Bypass Browser Cache) -->
+  <link rel="stylesheet" href="styles.css?v=3.0">
+</head>
+<body class="loading-locked">
+
+  <!-- Ultra-Premium Monochromatic Preloader -->
+  <div id="preloader">
+    <div class="preloader-content">
+      <div class="preloader-badge font-mono">SYSTEM INITIALIZATION ACTIVE</div>
+      <h1 class="preloader-title" id="preloader-text">Sniffer portátil Aram González</h1>
+      <div class="preloader-bar-wrap">
+        <div class="preloader-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HUD Header -->
+  <header id="hud-header">
+    <div class="hud-logo">
+      <span class="logo-icon">📡</span>
+      <span class="logo-text">LILYGO <span class="logo-sub">W.I.S.</span></span>
+    </div>
+    
+    <div class="hud-status-bar">
+      <div class="hud-stat-item">
+        <span class="hud-dot pulsing-green"></span>
+        <span class="hud-label">SYSTEM_OK</span>
+      </div>
+      <div class="hud-stat-item hide-mobile">
+        <span class="hud-label-dim">NET:</span>
+        <span class="hud-value font-mono">LOCAL_AP</span>
+      </div>
+      <div class="hud-stat-item hide-mobile">
+        <span class="hud-label-dim">GPS:</span>
+        <span class="hud-value font-mono blinking-text">3D_LOCK</span>
+      </div>
+      <div class="hud-stat-item">
+        <span class="hud-label-dim">BATT:</span>
+        <span class="hud-value font-mono">98%</span>
+      </div>
+    </div>
+
+    <div class="hud-actions">
+      <a href="#invest-section" class="hud-btn glow-border">SOLICITAR KIT</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="hero-section">
+    <div class="hero-container">
+      <div class="hero-content">
+        <div class="badge-investor">
+          <span class="badge-dot"></span> SISTEMA PORTÁTIL AUTÓNOMO • AUDITORÍA DE REDES
+        </div>
+        <h1 class="hero-title">
+          La Seguridad Inalámbrica <br>
+          <span class="gradient-text">En la Palma de tu Mano</span>
+        </h1>
+        <p class="hero-description">
+          <strong>LILYGO Wireless Intelligence Scanner</strong> es una plataforma portátil de monitoreo inalámbrico basada en ESP32 diseñada para detectar actividad WiFi y Bluetooth en tiempo real. El sistema combina análisis de tráfico WiFi, detección de dispositivos BLE sospechosos y geolocalización GPS en una sola interfaz ligera y accesible mediante WiFi local.
+        </p>
+        
+        <div class="hero-buttons">
+          <a href="#simulator-section" class="btn btn-primary btn-glow">PROBAR SIMULADOR</a>
+          <a href="#anatomy-section" class="btn btn-secondary">VER HARDWARE</a>
+        </div>
+
+        <div class="hero-metrics">
+          <div class="metric-card">
+            <span class="metric-num">520 KB</span>
+            <span class="metric-lbl">Memoria SRAM</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-num">240 MHz</span>
+            <span class="metric-lbl">Dual-Core Xtensa LX6</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-num">128x64 px</span>
+            <span class="metric-lbl">Pantalla OLED SSD1306</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="device-glow-back"></div>
+        <div class="esp32-hero-wrapper" id="esp32-hero-wrapper">
+          <!-- ESP32 Device SVG -->
+          <svg id="esp32-svg" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="pcb-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#0f1118"/>
+                <stop offset="100%" stop-color="#1b2030"/>
+              </linearGradient>
+              <linearGradient id="copper-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#cc8a00"/>
+                <stop offset="50%" stop-color="#ffb732"/>
+                <stop offset="100%" stop-color="#b27500"/>
+              </linearGradient>
+              <linearGradient id="shield-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#b0b5c0"/>
+                <stop offset="50%" stop-color="#d8dee9"/>
+                <stop offset="100%" stop-color="#8f95a3"/>
+              </linearGradient>
+              <linearGradient id="oled-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#020813"/>
+                <stop offset="100%" stop-color="#001830"/>
+              </linearGradient>
+              <linearGradient id="gps-ant-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#a06030"/>
+                <stop offset="100%" stop-color="#df9a65"/>
+              </linearGradient>
+              <filter id="neon-glow-cyan" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="6" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+              <filter id="neon-glow-magenta" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="6" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+
+            <!-- CONCENTRIC WAVES FROM ANTENNA (BACKGROUND) -->
+            <g id="antenna-waves" opacity="0.7">
+              <circle cx="250" cy="110" r="30" fill="none" stroke="#00e5ff" stroke-width="1.5" stroke-dasharray="4 4"/>
+              <circle cx="250" cy="110" r="55" fill="none" stroke="#00e5ff" stroke-width="1.5" opacity="0.8"/>
+              <circle cx="250" cy="110" r="80" fill="none" stroke="#00e5ff" stroke-width="2" opacity="0.6" stroke-dasharray="10 6"/>
+              <circle cx="250" cy="110" r="110" fill="none" stroke="#ff007f" stroke-width="1.5" opacity="0.4"/>
+              <circle cx="250" cy="110" r="140" fill="none" stroke="#00e5ff" stroke-width="2" opacity="0.2"/>
+            </g>
+
+            <!-- 1. PCB BASE LAYER -->
+            <g id="board-base" class="device-layer">
+              <!-- Matte Black PCB Board -->
+              <rect x="120" y="80" width="260" height="340" rx="20" fill="url(#pcb-grad)" stroke="#2d3748" stroke-width="3" />
+              <!-- Solder mounting holes -->
+              <circle cx="140" cy="100" r="6" fill="#111" stroke="url(#copper-grad)" stroke-width="2" />
+              <circle cx="360" cy="100" r="6" fill="#111" stroke="url(#copper-grad)" stroke-width="2" />
+              <circle cx="140" cy="400" r="6" fill="#111" stroke="url(#copper-grad)" stroke-width="2" />
+              <circle cx="360" cy="400" r="6" fill="#111" stroke="url(#copper-grad)" stroke-width="2" />
+              <!-- Copper traces (Decorative circuits) -->
+              <path d="M 140 120 L 140 180 L 170 210 M 360 120 L 360 180 L 330 210" fill="none" stroke="url(#copper-grad)" stroke-width="1.5" opacity="0.6" />
+              <path d="M 170 350 L 150 370 L 150 390 M 330 350 L 350 370 L 350 390" fill="none" stroke="url(#copper-grad)" stroke-width="1.5" opacity="0.6" />
+              <!-- Side Pins/Headers (Gold) -->
+              <g id="pcb-pins" opacity="0.8">
+                <!-- Left Pin Row -->
+                <rect x="108" y="140" width="12" height="8" rx="2" fill="url(#copper-grad)" />
+                <rect x="108" y="160" width="12" height="8" rx="2" fill="url(#copper-grad)" />
+                <rect x="108" y="180" width="12" height="8" rx="2" fill="url(#copper-grad)" />
+                <rect x="108" y="200" width="12" height="8" rx="2" fill="url(#copper-grad)" />
+                <rect x="108" y="220" width="12" height="8" rx="2" fill="url(#copper-grad)" />
+                <rect x="108" y="240" width="12" height="8" rx="2" fill="url(#copper-grad)" />
+                <rect x="108" y="260" width="12" height="8" rx="2" fill="url(#copper-grad)" />
+                <rect x="108" y="280" width="12" height="8" rx="2" fill="url(#copper-grad)" />
+                <rect x="108" y="300" width="12" height="8" rx="2" fill="url(#copper-grad)" />
+                <rect x="108" y="320" width="12" height="8" rx="2" fill="url(#copper-grad)" />
+                <!-- Right Pin Row -->
+                <rect x="380" y="140" width="12" height="8" rx="2" fill="url(#copper-grad)" />
+                <rect x="380" y="160" width="12" height="8" rx="2" fill="url(#copper-grad)" />
+                <rect x="380" y="180" width="12" height="8" rx="2" fill="url(#copper-grad)" />
+                <rect x="380" y="200" width="12" height="8" rx="2" fill="url(#copper-grad)" />
+                <rect x="380" y="220" width="12" height="8" rx="2" fill="url(#copper-grad)" />
+                <rect x="380" y="240" width="12" height="8" rx="2" fill="url(#copper-grad)" />
+                <rect x="380" y="260" width="12" height="8" rx="2" fill="url(#copper-grad)" />
+                <rect x="380" y="280" width="12" height="8" rx="2" fill="url(#copper-grad)" />
+                <rect x="380" y="300" width="12" height="8" rx="2" fill="url(#copper-grad)" />
+                <rect x="380" y="320" width="12" height="8" rx="2" fill="url(#copper-grad)" />
+              </g>
+              <!-- USB-C Port -->
+              <rect x="220" y="414" width="60" height="12" rx="4" fill="#000" stroke="#777" stroke-width="1.5" />
+              <rect x="230" y="420" width="40" height="4" fill="#333" />
+            </g>
+
+            <!-- 2. POWER REGULATION & BATTERY CONTROLLER -->
+            <g id="board-power" class="device-layer">
+              <!-- LiPo Power IC -->
+              <rect x="150" y="340" width="40" height="35" rx="3" fill="#1a1c23" stroke="#ffb732" stroke-width="1" />
+              <text x="170" y="358" font-family="Orbitron" font-size="6" fill="#ffb732" text-anchor="middle" font-weight="bold">AXP192</text>
+              <rect x="155" y="365" width="30" height="4" fill="#ff0000" opacity="0.8" />
+              <!-- Battery Connection Port -->
+              <rect x="200" y="350" width="20" height="15" rx="2" fill="#dcdcdc" stroke="#333" />
+              <rect x="203" y="346" width="5" height="4" fill="#ff2222" />
+              <rect x="212" y="346" width="5" height="4" fill="#111111" />
+            </g>
+
+            <!-- 3. GPS MODULE (U-BLOX U10) -->
+            <g id="board-gps" class="device-layer">
+              <!-- GPS Ceramic Patch Antenna -->
+              <rect x="300" y="320" width="50" height="50" rx="6" fill="url(#gps-ant-grad)" stroke="#dcdcdc" stroke-width="1.5" />
+              <rect x="310" y="330" width="30" height="30" rx="2" fill="#696969" stroke="#b87333" stroke-width="2" />
+              <circle cx="325" cy="345" r="4" fill="#fff" />
+              <circle cx="325" cy="345" r="1.5" fill="#000" />
+              <text x="325" y="377" font-family="Orbitron" font-size="8" fill="#ffb732" text-anchor="middle" font-weight="bold">GPS ACTIVE</text>
+            </g>
+
+            <!-- 4. ESP32-WROOM SoC SHIELD -->
+            <g id="board-soc" class="device-layer">
+              <!-- Metallic Shielding -->
+              <rect x="150" y="110" width="80" height="85" rx="5" fill="url(#shield-grad)" stroke="#4e5563" stroke-width="2" />
+              <!-- ESP32 Logo Text Engraved -->
+              <text x="190" y="135" font-family="'Space Grotesk', sans-serif" font-size="12" font-weight="900" fill="#2d3748" text-anchor="middle" letter-spacing="1">ESP32</text>
+              <text x="190" y="148" font-family="Orbitron" font-size="6" font-weight="bold" fill="#3f4857" text-anchor="middle">WROOM-32E</text>
+              <!-- Small components on shield -->
+              <rect x="160" y="160" width="12" height="8" rx="1" fill="#c2c2c2" stroke="#444" stroke-width="0.5" />
+              <rect x="175" y="160" width="8" height="8" rx="1" fill="#d29060" />
+              <!-- Golden Antenna Trace (integrated RF) -->
+              <rect x="150" y="90" width="80" height="20" fill="#111" rx="2" />
+              <path d="M 155 105 H 170 V 95 H 180 V 105 H 190 V 95 H 200 V 105 H 210 V 95 H 225" fill="none" stroke="url(#copper-grad)" stroke-width="2" />
+            </g>
+
+            <!-- 5. ACTIVE OLED DISPLAY -->
+            <g id="board-screen" class="device-layer">
+              <!-- Screen Base Frame -->
+              <rect x="150" y="210" width="200" height="95" rx="8" fill="#12131a" stroke="#333" stroke-width="3" />
+              <!-- Glowing Display Area -->
+              <rect x="156" y="216" width="188" height="83" rx="4" fill="url(#oled-grad)" stroke="#00e5ff" stroke-width="1.5" filter="url(#neon-glow-cyan)" />
+              
+              <!-- Simulated OS interface inside OLED -->
+              <!-- Header info -->
+              <text x="162" y="228" font-family="Orbitron" font-size="6" fill="#00e5ff" font-weight="bold">SSD1306 OLED (128x64)</text>
+              <text x="338" y="228" font-family="Orbitron" font-size="6" fill="#39ff14" font-weight="bold" text-anchor="end">SYS: SCANNING</text>
+              <line x1="162" y1="232" x2="338" y2="232" stroke="#00e5ff" stroke-width="0.5" opacity="0.8" />
+              
+              <!-- Graphs / Signals -->
+              <path d="M 162 270 Q 180 250 195 275 T 230 240 T 260 280 T 290 245 T 320 270 L 338 260" fill="none" stroke="#00e5ff" stroke-width="1.5" />
+              <path d="M 162 280 Q 175 265 190 285 T 225 255 T 250 280 T 285 260 T 310 278 L 338 275" fill="none" stroke="#ff007f" stroke-width="1" opacity="0.7" />
+              
+              <!-- Dynamic HUD overlay elements -->
+              <text x="162" y="243" font-family="Orbitron" font-size="6" fill="#00e5ff" opacity="0.9">CH: 6 [2.4GHz]</text>
+              <text x="162" y="251" font-family="Orbitron" font-size="6" fill="#ff007f" opacity="0.9">BLE: 18 DEVS</text>
+              
+              <text x="338" y="243" font-family="Orbitron" font-size="6" fill="#39ff14" text-anchor="end">GPS: FIXED</text>
+              <text x="338" y="251" font-family="Orbitron" font-size="5" fill="#a0aec0" text-anchor="end">40.7128N, 74.0060W</text>
+
+              <rect x="200" y="283" width="100" height="12" rx="2" fill="#001830" stroke="#00e5ff" stroke-width="0.5" />
+              <text x="250" y="291" font-family="Orbitron" font-size="6" fill="#00e5ff" text-anchor="middle" font-weight="bold" class="blinking-text">PULSE: OK (RSSI: -54dBm)</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky Interactive Anatomy Exploded Section -->
+  <section id="anatomy-section">
+    <div class="section-title-wrap">
+      <h2 class="section-subtitle">INGENIERÍA AVANZADA</h2>
+      <h2 class="section-title">Anatomía del Dispositivo</h2>
+      <p class="section-lead">Desmontamos el hardware para mostrarte cómo se integran el microprocesador, la pantalla y los sensores en un diseño ultra-compacto y eficiente. Desplázate para ver cada capa tecnológica.</p>
+    </div>
+
+    <div class="anatomy-container">
+      <div class="anatomy-sticky-left">
+        <!-- Visual frame holding the device that will react to ScrollTrigger -->
+        <div class="anatomy-visual-frame">
+          <div class="laser-scanner"></div>
+          <div class="device-shadow"></div>
+          <div class="esp32-anatomy-wrapper" id="esp32-anatomy-wrapper">
+            <!-- This SVG will be identical but animated internally by GSAP scroll -->
+            <svg id="esp32-anatomy-svg" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+              <!-- Reusing definitions from the hero SVG through CSS or rendering a copy -->
+              <!-- In the app.js, we will manipulate the individual layers directly:
+                   - #ana-waves
+                   - #ana-base
+                   - #ana-power
+                   - #ana-gps
+                   - #ana-soc
+                   - #ana-screen
+              -->
+              <g id="ana-waves" opacity="0">
+                <circle cx="250" cy="110" r="30" fill="none" stroke="#00e5ff" stroke-width="1.5" stroke-dasharray="4 4"/>
+                <circle cx="250" cy="110" r="60" fill="none" stroke="#39ff14" stroke-width="2"/>
+                <circle cx="250" cy="110" r="90" fill="none" stroke="#ff007f" stroke-width="1.5" stroke-dasharray="8 4"/>
+              </g>
+
+              <!-- Base PCB -->
+              <g id="ana-base">
+                <rect x="120" y="80" width="260" height="340" rx="20" fill="url(#pcb-grad)" stroke="#2d3748" stroke-width="3" />
+                <circle cx="140" cy="100" r="6" fill="#111" stroke="url(#copper-grad)" stroke-width="2" />
+                <circle cx="360" cy="100" r="6" fill="#111" stroke="url(#copper-grad)" stroke-width="2" />
+                <circle cx="140" cy="400" r="6" fill="#111" stroke="url(#copper-grad)" stroke-width="2" />
+                <circle cx="360" cy="400" r="6" fill="#111" stroke="url(#copper-grad)" stroke-width="2" />
+                <path d="M 140 120 L 140 180 L 170 210 M 360 120 L 360 180 L 330 210" fill="none" stroke="url(#copper-grad)" stroke-width="1.5" opacity="0.4" />
+                <!-- Pins -->
+                <g opacity="0.6">
+                  <rect x="108" y="160" width="12" height="8" fill="url(#copper-grad)" /><rect x="108" y="200" width="12" height="8" fill="url(#copper-grad)" /><rect x="108" y="240" width="12" height="8" fill="url(#copper-grad)" /><rect x="108" y="280" width="12" height="8" fill="url(#copper-grad)" /><rect x="108" y="320" width="12" height="8" fill="url(#copper-grad)" />
+                  <rect x="380" y="160" width="12" height="8" fill="url(#copper-grad)" /><rect x="380" y="200" width="12" height="8" fill="url(#copper-grad)" /><rect x="380" y="240" width="12" height="8" fill="url(#copper-grad)" /><rect x="380" y="280" width="12" height="8" fill="url(#copper-grad)" /><rect x="380" y="320" width="12" height="8" fill="url(#copper-grad)" />
+                </g>
+                <rect x="220" y="414" width="60" height="12" rx="4" fill="#000" stroke="#777" stroke-width="1.5" />
+              </g>
+
+              <!-- Power module -->
+              <g id="ana-power">
+                <rect x="150" y="340" width="40" height="35" rx="3" fill="#1a1c23" stroke="#ffb732" stroke-width="1" />
+                <text x="170" y="358" font-family="Orbitron" font-size="6" fill="#ffb732" text-anchor="middle" font-weight="bold">AXP192</text>
+                <rect x="200" y="350" width="20" height="15" rx="2" fill="#dcdcdc" stroke="#333" />
+              </g>
+
+              <!-- GPS Module -->
+              <g id="ana-gps">
+                <rect x="300" y="320" width="50" height="50" rx="6" fill="url(#gps-ant-grad)" stroke="#dcdcdc" stroke-width="1.5" />
+                <rect x="310" y="330" width="30" height="30" rx="2" fill="#696969" stroke="#b87333" stroke-width="2" />
+                <circle cx="325" cy="345" r="4" fill="#fff" />
+                <text x="325" y="377" font-family="Orbitron" font-size="7" fill="#ffb732" text-anchor="middle" font-weight="bold">GPS</text>
+              </g>
+
+              <!-- SoC ESP32 -->
+              <g id="ana-soc">
+                <rect x="150" y="110" width="80" height="85" rx="5" fill="url(#shield-grad)" stroke="#4e5563" stroke-width="2" />
+                <text x="190" y="145" font-family="'Space Grotesk', sans-serif" font-size="12" font-weight="900" fill="#2d3748" text-anchor="middle" letter-spacing="1">ESP32</text>
+                <rect x="150" y="90" width="80" height="20" fill="#111" rx="2" />
+                <path d="M 155 105 H 170 V 95 H 180 V 105 H 190 V 95 H 200 V 105 H 210 V 95 H 225" fill="none" stroke="url(#copper-grad)" stroke-width="2" />
+              </g>
+
+              <!-- OLED Screen -->
+              <g id="ana-screen">
+                <rect x="150" y="210" width="200" height="95" rx="8" fill="#12131a" stroke="#333" stroke-width="3" />
+                <rect x="156" y="216" width="188" height="83" rx="4" fill="url(#oled-grad)" stroke="#00e5ff" stroke-width="1.5" filter="url(#neon-glow-cyan)" />
+                <text x="250" y="250" font-family="Orbitron" font-size="10" fill="#00e5ff" text-anchor="middle" font-weight="bold">SSD1306 OLED</text>
+                <text x="250" y="265" font-family="Orbitron" font-size="6" fill="#39ff14" text-anchor="middle">I2C INTERFACE ACTIVE</text>
+                <path d="M 160 280 H 340" stroke="#00e5ff" stroke-width="1.5" stroke-dasharray="4 4" />
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="anatomy-scroll-right">
+        <!-- Step 1: Base PCB -->
+        <div class="anatomy-step" id="step-pcb">
+          <div class="step-num">01</div>
+          <h3 class="step-title">Placa Base de Fibra de Vidrio Multicapa</h3>
+          <p class="step-desc">
+            Diseñada en un factor de forma ultra-reducido. Cuenta con pistas de cobre optimizadas para evitar interferencias de radiofrecuencia (RF) y un plano de tierra aislado para lecturas de señal de alta precisión.
+          </p>
+          <div class="tech-spec-grid">
+            <span class="spec-label">Material:</span><span class="spec-val">FR4 Grado Industrial</span>
+            <span class="spec-label">Dimensiones:</span><span class="spec-val">65mm x 45mm x 12mm</span>
+            <span class="spec-label">Conexión:</span><span class="spec-val">USB-C Nativo Directo</span>
+          </div>
+        </div>
+
+        <!-- Step 2: SoC ESP32 -->
+        <div class="anatomy-step" id="step-soc">
+          <div class="step-num">02</div>
+          <h3 class="step-title">Chip SoC ESP32 Dual-Core (Xtensa LX6)</h3>
+          <p class="step-desc">
+            El cerebro del sistema. Ejecuta simultáneamente dos núcleos Xtensa LX6 de 32 bits a 240 MHz. Integra físicamente las radios de Wi-Fi 802.11 b/g/n y Bluetooth v4.2 BLE en un único silicio de alta eficiencia.
+          </p>
+          <div class="tech-spec-grid">
+            <span class="spec-label">Procesador:</span><span class="spec-val">Dual-Core Xtensa LX6 @ 240 MHz</span>
+            <span class="spec-label">Memorias:</span><span class="spec-val">520 KB SRAM / 4 MB Flash</span>
+            <span class="spec-label">Radios:</span><span class="spec-val">WiFi 2.4 GHz 802.11 b/g/n + Bluetooth 4.2 BLE</span>
+          </div>
+        </div>
+
+        <!-- Step 3: OLED SSD1306 Screen -->
+        <div class="anatomy-step" id="step-screen">
+          <div class="step-num">03</div>
+          <h3 class="step-title">Pantalla OLED SSD1306 (128x64px)</h3>
+          <p class="step-desc">
+            Interfaz gráfica de ultra-bajo consumo integrada en el hardware. Conectada directamente a través del bus I2C en los puertos de datos IO21 (SDA) e IO22 (SCL). Proporciona telemetría inalámbrica y estados del sistema en tiempo real.
+          </p>
+          <div class="tech-spec-grid">
+            <span class="spec-label">Tecnología:</span><span class="spec-val">OLED Monocromática</span>
+            <span class="spec-label">Resolución:</span><span class="spec-val">128 x 64 píxeles</span>
+            <span class="spec-label">Conexión:</span><span class="spec-val">I2C (SDA: IO21 / SCL: IO22)</span>
+          </div>
+        </div>
+
+        <!-- Step 4: GPS Module UART -->
+        <div class="anatomy-step" id="step-gps">
+          <div class="step-num">04</div>
+          <h3 class="step-title">Geolocalización GPS por UART</h3>
+          <p class="step-desc">
+            Módulo receptor satelital de alta ganancia conectado físicamente a la interfaz UART del ESP32 a través de los pines IO13 (RX) e IO12 (TX). Permite georreferenciar incidentes WiFi o BLE en tiempo real sin requerir internet.
+          </p>
+          <div class="tech-spec-grid">
+            <span class="spec-label">Conexión:</span><span class="spec-val">UART (RX: IO13 / TX: IO12)</span>
+            <span class="spec-label">Satelital:</span><span class="spec-val">GPS / GLONASS / Galileo</span>
+            <span class="spec-label">Fijación:</span><span class="spec-val">Antena activa integrada</span>
+          </div>
+        </div>
+
+        <!-- Step 5: Power & Management -->
+        <div class="anatomy-step" id="step-power">
+          <div class="step-num">05</div>
+          <h3 class="step-title">Gestión de Energía Eficiente</h3>
+          <p class="step-desc">
+            Circuito de alimentación optimizado para despliegues portátiles en campo. Regula dinámicamente los voltajes de los núcleos del procesador Xtensa, de los sensores y las radios inalámbricas, asegurando un consumo mínimo de batería.
+          </p>
+          <div class="tech-spec-grid">
+            <span class="spec-label">Alimentación:</span><span class="spec-val">5V por USB-C o LiPo</span>
+            <span class="spec-label">Consumo Típico:</span><span class="spec-val">Menos de 85mA (Ahorro Activo)</span>
+            <span class="spec-label">Portabilidad:</span><span class="spec-val">Operación autónoma</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Deep-Tech Features Section -->
+  <section id="features-section">
+    <div class="section-title-wrap text-center">
+      <h2 class="section-subtitle">PODER INALÁMBRICO PASIVO</h2>
+      <h2 class="section-title">Funcionalidades del Sistema</h2>
+      <p class="section-lead max-w-600">Tres vectores de análisis técnicos integrados de manera lineal y compacta para ofrecer un diagnóstico de seguridad total.</p>
+    </div>
+
+    <div class="features-linear-list">
+      <!-- Feature 1: WiFi Sniffer with simulated console -->
+      <div class="feature-row animate-on-scroll">
+        <div class="feature-icon-wrap">
+          <span class="feature-icon">📡</span>
+        </div>
+        <h3 class="feature-title">Sniffer WiFi Inteligente</h3>
+        <p class="feature-text">
+          Detecta actividad inalámbrica en el espectro de 2.4 GHz cercana en tiempo real. Analiza de manera pasiva Probe Requests y Beacons para identificar qué dispositivos están buscando redes WiFi. Muestra MACs activas, canal, potencia de señal (RSSI) y detecta actividad persistente o anómala.
+        </p>
+        
+        <!-- Live Terminal Simulation inside card -->
+        <div class="terminal-container">
+          <div class="terminal-header">
+            <span class="term-title">wifi_sniffer.py</span>
+            <span class="term-badge">PASSIVE MONITOR</span>
+          </div>
+          <div class="terminal-body" id="wifi-terminal">
+            <div class="term-line output-cyan">[INFO] Inicializando interface WiFi en modo Monitor...</div>
+            <div class="term-line output-green">[OK] Canal 6 activo. Escaneando ondas electromagnéticas...</div>
+            <div class="term-line"><span class="output-dim">10:42:01</span> <span class="output-magenta">PROBE_REQ</span> MAC: <span class="output-white">a4:7b:2c:19:d0:43</span> RSSI: <span class="output-cyan">-68dBm</span> SSID: "Home_WiFi"</div>
+            <div class="term-line"><span class="output-dim">10:42:04</span> <span class="output-yellow">BEACON</span> MAC: <span class="output-white">c8:d7:19:a3:bf:02</span> RSSI: <span class="output-green">-45dBm</span> CH: 6 SSID: "Net_Office_5"</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature 2: BLE Tracker with dynamic radar -->
+      <div class="feature-row animate-on-scroll">
+        <div class="feature-icon-wrap">
+          <span class="feature-icon">🔎</span>
+        </div>
+        <h3 class="feature-title">Detección BLE / Posibles Tags</h3>
+        <p class="feature-text">
+          Escanea dispositivos Bluetooth Low Energy cercanos. Detecta rastreadores sin nombre o con patrones similares a trackers y localizadores (tags). Monitorea de cerca la intensidad de su señal y persistencia, y genera alertas visuales de riesgo ante posibles seguimientos.
+        </p>
+
+        <!-- Dynamic BLE Radar simulator -->
+        <div class="radar-hud-container">
+          <div class="radar-box">
+            <div class="radar-sweep"></div>
+            <div class="radar-grid-circle grid-1"></div>
+            <div class="radar-grid-circle grid-2"></div>
+            <div class="radar-grid-circle grid-3"></div>
+            <!-- Radar Targets -->
+            <div class="radar-target target-1 pulsing-danger" style="top: 35%; left: 65%;">
+              <span class="target-ping"></span>
+            </div>
+            <div class="radar-target target-2" style="top: 70%; left: 25%;">
+              <span class="target-ping"></span>
+            </div>
+            <div class="radar-center"></div>
+          </div>
+          <div class="radar-legend">
+            1x BLE TRACKER SOSPECHOSO (AirTag) • 1x Smartwatch Genérico (Seguro)
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature 3: GPS mapping & targets -->
+      <div class="feature-row animate-on-scroll">
+        <div class="feature-icon-wrap">
+          <span class="feature-icon">📍</span>
+        </div>
+        <h3 class="feature-title">Integración GPS</h3>
+        <p class="feature-text">
+          Obtiene coordenadas satelitales en tiempo real de manera autónoma. Permite registrar con precisión las ubicaciones geográficas exactas donde se detectó actividad sospechosa y exportar registros compatibles con Google Maps para auditorías forenses.
+        </p>
+
+        <!-- Simulated Tactical Map HUD -->
+        <div class="gps-hud-container">
+          <div class="gps-tactical-map">
+            <div class="map-grid"></div>
+            <div class="map-route-line"></div>
+            <!-- Target points -->
+            <div class="map-waypoint wp-1" style="top: 40%; left: 30%;"></div>
+            <div class="map-waypoint wp-2" style="top: 25%; left: 65%;"></div>
+            <div class="map-user-dot" style="top: 60%; left: 50%;">
+              <span class="user-pulse"></span>
+            </div>
+          </div>
+          <div class="gps-data-box font-mono">
+            <div>LAT: 40.7128N</div>
+            <div>LNG: -74.0060W</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Live Simulator Section (Smartphone Demo) -->
+  <section id="simulator-section">
+    <div class="section-title-wrap text-center">
+      <h2 class="section-subtitle">INTERFAZ DE USUARIO INTEGRADA</h2>
+      <h2 class="section-title">Experimenta la Consola en Vivo</h2>
+      <p class="section-lead max-w-600">Simulación del portal cautivo integrado en el hardware LILYGO. El dispositivo genera su propia red local WiFi para que lo operes desde cualquier celular.</p>
+    </div>
+
+  <!-- Interactive Live Simulator Section (Smartphone Unified Demo) -->
+  <section id="simulator-section">
+    <div class="simulator-showcase-container">
+      <div class="section-title-wrap text-center">
+        <h2 class="section-subtitle">INTERFAZ DE USUARIO INTEGRADA</h2>
+        <h2 class="section-title">Experimenta la Consola en Vivo</h2>
+        <p class="section-lead max-w-600">Simulación de la consola en tiempo real integrada en el hardware. El dispositivo genera su propia red local WiFi para que lo operes desde cualquier celular o laptop sin internet.</p>
+      </div>
+
+      <!-- Pristine Smartphone Mockup Centered -->
+      <div class="phone-mockup animate-on-scroll">
+        <div class="phone-speaker"></div>
+        <div class="phone-screen-container">
+          <div class="phone-hud-bar">
+            <span class="phone-time">10:42 AM</span>
+            <div class="phone-icons">
+              <span>📶 ESP32_AP</span>
+              <span>🔋 98%</span>
+            </div>
+          </div>
+
+          <!-- Dashboard Main Container -->
+          <div class="phone-dashboard">
+            <!-- Dashboard Header -->
+            <div class="dash-header">
+              <div class="dash-logo">📡 LILYGO SCANNER</div>
+              <div class="dash-status-dot pulsing-green"></div>
+            </div>
+
+            <!-- Single Unified Content Viewport (Borderless settings layout) -->
+            <div class="dash-content-viewport">
+              
+              <!-- Redes WiFi -->
+              <div class="pane-headline">
+                <span>📡 Redes WiFi Cercanas</span>
+                <span class="pane-badge font-mono">MONITOR_ON</span>
+              </div>
+              <div class="wifi-list-simulation">
+                <div class="wifi-item">
+                  <div class="wifi-meta">
+                    <span class="wifi-ssid font-mono">Guest_Corporate_HQ</span>
+                    <span class="wifi-mac font-mono">1C:2B:A2:3E:44:0B</span>
+                  </div>
+                  <div class="wifi-signal">
+                    <span class="wifi-rssi font-mono">-42dBm</span>
+                  </div>
+                </div>
+                <div class="wifi-item">
+                  <div class="wifi-meta">
+                    <span class="wifi-ssid font-mono">Apple_TV_Conference</span>
+                    <span class="wifi-mac font-mono">B4:F6:1C:8A:90:5E</span>
+                  </div>
+                  <div class="wifi-signal">
+                    <span class="wifi-rssi font-mono">-68dBm</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Bluetooth Low Energy -->
+              <div class="pane-headline">
+                <span>🔎 Bluetooth Low Energy</span>
+                <span class="pane-badge font-mono">HEURÍSTICAS BLE</span>
+              </div>
+              <div class="ble-list-simulation">
+                <div class="ble-item tracking-risk">
+                  <div class="ble-meta">
+                    <span class="ble-name font-mono">⚠️ TRACKER DETECTADO (AirTag)</span>
+                    <span class="ble-mac font-mono">Persistencia: 94% | RSSI: -42dBm</span>
+                  </div>
+                  <div class="ble-signal">
+                    <span class="ble-rssi font-mono text-danger">RIESGO</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- GPS Lock -->
+              <div class="pane-headline">
+                <span>📍 Ubicación GPS Satelital</span>
+                <span class="pane-badge font-mono">LOCK_ON</span>
+              </div>
+              <div class="gps-data-box font-mono">
+                <div>LAT: 40.7128N</div>
+                <div>LNG: -74.0060W</div>
+              </div>
+
+              <!-- System stats log console -->
+              <div class="pane-headline">
+                <span>⚡ Bitácora de Parámetros</span>
+              </div>
+              <div class="sys-metrics-simulation font-mono">
+                <div class="sys-row">
+                  <span>CPU:</span><span class="text-cyan">ESP32 Xtensa LX6 (240MHz)</span>
+                </div>
+                <div class="sys-row">
+                  <span>SRAM TOTAL:</span><span class="text-green">520 KB</span>
+                </div>
+                <div class="sys-row">
+                  <span>FLASH SPI:</span><span class="text-green">4 MB</span>
+                </div>
+                <div class="sys-row">
+                  <span>OLED:</span><span class="text-cyan">SSD1306 128x64 (I2C)</span>
+                </div>
+                <div class="sys-row">
+                  <span>GPS UART:</span><span class="text-cyan">ACTIVE (IO13/IO12)</span>
+                </div>
+              </div>
+
+              <div class="sys-console-output font-mono" id="sys-console">
+                [SYS] ESP32 Xtensa LX6 Dual-Core OK. <br>
+                [SYS] OLED SSD1306 I2C (SDA:21/SCL:22) OK. <br>
+                [SYS] GPS UART (RX:13/TX:12) Lock Active.
+              </div>
+
+              <button class="btn-action-sim font-mono" id="btn-ble-alert">FORZAR ALERTA DE SEGUIMIENTO</button>
+
+            </div>
+          </div>
+        </div>
+        <div class="phone-home-btn"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ecosistema y Robustez Técnica (Linear Showcase) -->
+  <section id="pitch-section">
+    <div class="section-title-wrap text-center">
+      <h2 class="section-subtitle">PLATAFORMA INTEGRADA Y PRIVADA</h2>
+      <h2 class="section-title">Ecosistema de Monitoreo Portátil</h2>
+      <p class="section-lead max-w-600">Un diseño de ciberseguridad inalámbrica sin cables, sin dependencias y de alta eficiencia energética.</p>
+    </div>
+
+    <div class="ecosystem-linear-list">
+      <div class="ecosystem-row animate-on-scroll">
+        <div class="pitch-header">
+          <span class="pitch-icon">📱</span>
+          <h3>Interfaz Web Integrada</h3>
+        </div>
+        <p class="pitch-desc">
+          El escáner genera su propia red WiFi local segura (Access Point). Conéctate desde cualquier celular, tablet o laptop para abrir una interfaz responsiva y completa en tiempo real. No requiere descargas de aplicaciones ni internet.
+        </p>
+      </div>
+
+      <div class="ecosystem-row animate-on-scroll">
+        <div class="pitch-header">
+          <span class="pitch-icon">⚡</span>
+          <h3>Arquitectura Ligera</h3>
+        </div>
+        <p class="pitch-desc">
+          El firmware está optimizado al extremo para hardware embebido de bajo consumo. Ejecuta múltiples hilos de escaneo en los dos núcleos del ESP32 con un uso mínimo de memoria interna y sin fugas de rendimiento.
+        </p>
+      </div>
+
+      <div class="ecosystem-row animate-on-scroll">
+        <div class="pitch-header">
+          <span class="pitch-icon">🔋</span>
+          <h3>Monitoreo Autónomo</h3>
+        </div>
+        <p class="pitch-desc">
+          Portabilidad total diseñada para auditoría y hacking ético en campo. Con un consumo eléctrico menor a 85mA, el dispositivo puede operar durante horas alimentado por una pequeña batería LiPo o por su puerto USB-C.
+        </p>
+      </div>
+    </div>
+
+    <!-- Big Technical Highlights Counter Section -->
+    <div class="investment-stats-banner">
+      <div class="stat-banner-card animate-on-scroll">
+        <span class="banner-num" id="count-cost" data-val="520">520 KB</span>
+        <span class="banner-lbl">Memoria SRAM Total</span>
+      </div>
+      <div class="stat-banner-card animate-on-scroll">
+        <span class="banner-num" id="count-roi" data-val="240">240 MHz</span>
+        <span class="banner-lbl">Frecuencia del Procesador Xtensa</span>
+      </div>
+      <div class="stat-banner-card animate-on-scroll">
+        <span class="banner-num" id="count-market" data-val="4">4 MB</span>
+        <span class="banner-lbl">Memoria Flash de Almacenamiento</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact & Info Capture Form -->
+  <section id="invest-section">
+    <div class="invest-form-container">
+      <div class="badge-investor" style="align-self: center; margin-bottom: 1.5rem;">
+        <span class="badge-dot pulsing-green"></span> ADQUIRIR SCANNER / SOLICITAR INFORMACIÓN
+      </div>
+      <h2 class="form-title text-center">Obtén tu LILYGO Wireless Scanner</h2>
+      <p class="form-lead text-center">
+        ¿Eres profesional de la ciberseguridad, hacker ético, auditor de sistemas o entusiasta del hardware? Completa el formulario para recibir guías de flasheo de firmware, actualizaciones de bases de datos MAC o solicitar un kit pre-ensamblado.
+      </p>
+
+      <form id="invest-form" onsubmit="event.preventDefault(); alert('¡Solicitud registrada con éxito! Te enviaremos toda la información técnica, firmware de inicio y catálogo del kit a tu correo electrónico.');">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="invest-name">NOMBRE Y APELLIDO</label>
+            <input type="text" id="invest-name" required placeholder="E.g., Samuel Vane">
+          </div>
+          <div class="form-group">
+            <label for="invest-company">ORGANIZACIÓN / EMPRESA</label>
+            <input type="text" id="invest-company" placeholder="E.g., Pentest Labs">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="invest-email">CORREO ELECTRÓNICO (SEGURO)</label>
+            <input type="email" id="invest-email" required placeholder="E.g., name@domain.com">
+          </div>
+          <div class="form-group">
+            <label for="invest-phone">TELÉFONO DE CONTACTO</label>
+            <input type="tel" id="invest-phone" placeholder="E.g., +34 600 000 000">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="invest-message">MENSAJE / ÁREA DE INTERÉS</label>
+          <textarea id="invest-message" rows="4" placeholder="Indica brevemente si estás interesado en comprar un kit preensamblado, colaborar en el código del firmware o recibir asistencia técnica..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-glow btn-block font-mono" id="btn-submit-pitch">SOLICITAR INFORMACIÓN Y KIT</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Tech Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="hud-logo">
+          <span class="logo-icon">📡</span>
+          <span class="logo-text">LILYGO <span class="logo-sub">W.I.S.</span></span>
+        </div>
+        <p class="footer-about">
+          Desarrollando herramientas de hardware cognitivo y monitoreo inalámbrico libre, autónomo y accesible para defender la privacidad en el siglo XXI.
+        </p>
+      </div>
+
+      <div class="footer-right">
+        <div class="footer-links">
+          <h4>TECNOLOGÍA</h4>
+          <a href="#anatomy-section">Arquitectura ESP32</a>
+          <a href="#features-section">Vectores de Escaneo</a>
+          <a href="#simulator-section">Simulador Local</a>
+        </div>
+        <div class="footer-links">
+          <h4>COMUNIDAD</h4>
+          <a href="#invest-section">Solicitar Kit</a>
+          <a href="#">Descargar Firmware</a>
+          <a href="#">Roadmap Técnico</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2026 LILYGO Wireless Intelligence Scanner. Todos los derechos reservados. Diseñado para auditoría y hacking ético autónomo.</p>
+      <div class="footer-security-stamp font-mono">SYS_STATUS: COMPLIANT | ENCRYPTION: ACTIVE</div>
+    </div>
+  </footer>
+
+  <!-- GSAP Libraries via CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
+  
+  <!-- Main Logic JS -->
+  <script src="app.js"></script>
+</body>
+</html>
