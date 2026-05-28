@@ -7,10 +7,13 @@ gsap.registerPlugin(ScrollTrigger, TextPlugin);
 
 document.addEventListener("DOMContentLoaded", () => {
   initPreloader();
+  initTextEntrance(); // Prepare dynamic text masks immediately
   initAnatomyScrollTrigger();
   initLiveSimulators();
   initSmartphoneMockup();
   initInvestorCounters();
+  initScrambleEffects();
+  initCyberCanvas();
 });
 
 /* ==========================================================================
@@ -59,8 +62,8 @@ function initHeroAnimations() {
   heroTL
     .from("#hud-header", { y: -30, opacity: 0, duration: 1.2 })
     .from(".badge-investor", { y: 15, opacity: 0, duration: 0.8 }, "-=0.6")
-    .from(".hero-title", { y: 24, opacity: 0, duration: 1 }, "-=0.6")
-    .from(".hero-description", { y: 16, opacity: 0, duration: 1 }, "-=0.8")
+    .to(".title-char", { y: "0%", opacity: 1, duration: 0.9, stagger: 0.01, ease: "power4.out" }, "-=0.8")
+    .to(".desc-word", { y: "0%", opacity: 1, duration: 0.9, stagger: 0.003, ease: "power3.out" }, "-=0.8")
     .from(".hero-buttons", { y: 16, opacity: 0, duration: 1 }, "-=0.8")
     .from(".metric-card", { y: 16, opacity: 0, stagger: 0.1, duration: 1 }, "-=0.8")
     .from(".hero-visual", { scale: 0.95, opacity: 0, duration: 1.5 }, "-=1.2");
@@ -433,6 +436,297 @@ function initInvestorCounters() {
         element.innerHTML = prefix + Math.floor(obj.val).toLocaleString() + suffix;
       }
     });
+  }
+}
+
+/* ==========================================================================
+   6. CYBERNETIC SCRAMBLE REVEAL EFFECTS (GSAP POWERED)
+   ========================================================================== */
+function scrambleText(element, finalVal, duration = 1.2) {
+  if (!element) return;
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#%@$&*+=?";
+  const originalText = finalVal;
+  const obj = { progress: 0 };
+  
+  element.innerText = "";
+  
+  gsap.to(obj, {
+    progress: 1,
+    duration: duration,
+    ease: "power1.inOut",
+    onUpdate: () => {
+      const currentLength = Math.floor(obj.progress * originalText.length);
+      let scramble = "";
+      for (let i = 0; i < originalText.length; i++) {
+        if (i < currentLength) {
+          scramble += originalText[i];
+        } else if (originalText[i] === " " || originalText[i] === "\n") {
+          scramble += originalText[i];
+        } else {
+          scramble += chars[Math.floor(Math.random() * chars.length)];
+        }
+      }
+      element.innerText = scramble;
+    },
+    onComplete: () => {
+      element.innerText = finalVal;
+    }
+  });
+}
+
+function initScrambleEffects() {
+  // Scramble words on page load for the hero section
+  const heroScrambles = document.querySelectorAll("#hero-section .scramble-word");
+  heroScrambles.forEach((el) => {
+    const finalVal = el.getAttribute("data-text") || el.innerText;
+    // We delay it slightly to align with the preloader slide-out
+    gsap.delayedCall(1.0, () => {
+      scrambleText(el, finalVal, 1.8);
+    });
+  });
+
+  // Scroll-triggered scrambles for other sections
+  const scrollScrambles = document.querySelectorAll("section:not(#hero-section) .scramble-word");
+  scrollScrambles.forEach((el) => {
+    const finalVal = el.getAttribute("data-text") || el.innerText;
+    ScrollTrigger.create({
+      trigger: el,
+      start: "top 80%",
+      onEnter: () => {
+        scrambleText(el, finalVal, 1.4);
+      },
+      once: true
+    });
+  });
+}
+
+/* ==========================================================================
+   7. INTERACTIVE ELECTROMAGNETIC NODE CANVAS ANIMATION
+   ========================================================================== */
+function initCyberCanvas() {
+  const canvas = document.getElementById("cyber-canvas");
+  if (!canvas) return;
+
+  const ctx = canvas.getContext("2d");
+  const heroSection = document.getElementById("hero-section");
+  if (!heroSection) return;
+
+  let width = (canvas.width = heroSection.offsetWidth);
+  let height = (canvas.height = heroSection.offsetHeight);
+
+  const particles = [];
+  const particleCount = Math.min(26, Math.floor((width * height) / 28000)); // Highly sparse and minimal
+  const connectionDistance = 90; // Shorter distance for cleaner, fewer lines
+  let mouse = { x: null, y: null, active: false };
+
+  function resize() {
+    width = canvas.width = heroSection.offsetWidth;
+    height = canvas.height = heroSection.offsetHeight;
+  }
+  window.addEventListener("resize", resize);
+
+  heroSection.addEventListener("mousemove", (e) => {
+    const rect = heroSection.getBoundingClientRect();
+    mouse.x = e.clientX - rect.left;
+    mouse.y = e.clientY - rect.top;
+    mouse.active = true;
+  });
+
+  heroSection.addEventListener("mouseleave", () => {
+    mouse.x = null;
+    mouse.y = null;
+    mouse.active = false;
+  });
+
+  const pulses = [];
+
+  class Particle {
+    constructor() {
+      this.x = Math.random() * width;
+      this.y = Math.random() * height;
+      this.vx = (Math.random() - 0.5) * 0.45;
+      this.vy = (Math.random() - 0.5) * 0.45;
+      this.radius = Math.random() * 1.5 + 0.8; // Smaller, sharper particles
+      this.color = Math.random() > 0.4 ? "rgba(0, 229, 255, " : "rgba(255, 0, 127, ";
+      this.baseAlpha = Math.random() * 0.25 + 0.12; // Lower baseline visibility
+      this.pulseTimer = Math.random() * 400 + 200; // Half the frequency of circular pulses
+    }
+
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+
+      if (this.x < 0 || this.x > width) this.vx *= -1;
+      if (this.y < 0 || this.y > height) this.vy *= -1;
+
+      this.pulseTimer--;
+      if (this.pulseTimer <= 0) {
+        pulses.push({
+          x: this.x,
+          y: this.y,
+          r: 2,
+          maxR: Math.random() * 50 + 35,
+          alpha: 0.75,
+          color: this.color
+        });
+        this.pulseTimer = Math.random() * 300 + 150;
+      }
+    }
+
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+      ctx.fillStyle = this.color + this.baseAlpha + ")";
+      ctx.fill();
+    }
+  }
+
+  for (let i = 0; i < particleCount; i++) {
+    particles.push(new Particle());
+  }
+
+  let isVisible = true;
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        isVisible = entry.isIntersecting;
+      });
+    }, { threshold: 0.1 });
+    observer.observe(heroSection);
+  }
+
+  function animate() {
+    if (!isVisible) {
+      requestAnimationFrame(animate);
+      return;
+    }
+
+    ctx.clearRect(0, 0, width, height);
+
+    for (let i = pulses.length - 1; i >= 0; i--) {
+      const p = pulses[i];
+      p.r += 0.8;
+      p.alpha -= 0.015;
+
+      if (p.alpha <= 0 || p.r >= p.maxR) {
+        pulses.splice(i, 1);
+        continue;
+      }
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.strokeStyle = p.color + p.alpha + ")";
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+
+    particles.forEach((p) => {
+      p.update();
+      p.draw();
+    });
+
+    for (let i = 0; i < particles.length; i++) {
+      const p1 = particles[i];
+      
+      if (mouse.active) {
+        const dx = p1.x - mouse.x;
+        const dy = p1.y - mouse.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 100) { // Shorter mouse connection radius
+          const alpha = (1 - dist / 100) * 0.2; // Fainter lines
+          ctx.beginPath();
+          ctx.moveTo(p1.x, p1.y);
+          ctx.lineTo(mouse.x, mouse.y);
+          ctx.strokeStyle = "rgba(0, 229, 255, " + alpha + ")";
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+
+      for (let j = i + 1; j < particles.length; j++) {
+        const p2 = particles[j];
+        const dx = p1.x - p2.x;
+        const dy = p1.y - p2.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < connectionDistance) {
+          const alpha = (1 - dist / connectionDistance) * 0.12; // Fainter network links
+          ctx.beginPath();
+          ctx.moveTo(p1.x, p1.y);
+          ctx.lineTo(p2.x, p2.y);
+          ctx.strokeStyle = (p1.color === p2.color) 
+            ? p1.color + alpha + ")" 
+            : "rgba(0, 229, 255, " + (alpha * 0.5) + ")";
+          ctx.lineWidth = 0.4;
+          ctx.stroke();
+        }
+      }
+    }
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+}
+
+/* ==========================================================================
+   8. PREMIUM GSAP CHARACTER & WORD MASK TEXT ENTRANCE
+   ========================================================================== */
+function initTextEntrance() {
+  const title = document.querySelector("#hero-section .hero-title");
+  if (title) {
+    const rawHTML = title.innerHTML;
+    const lineStrings = rawHTML.split(/<br\s*\/?>/i);
+    let finalHTML = "";
+
+    lineStrings.forEach((lineStr, lineIdx) => {
+      let lineHTML = `<div class="title-line-mask">`;
+
+      const tempDiv = document.createElement("div");
+      tempDiv.innerHTML = lineStr;
+      
+      const nodes = Array.from(tempDiv.childNodes);
+      nodes.forEach((node) => {
+        if (node.nodeType === Node.TEXT_NODE) {
+          const words = node.textContent.split(/\s+/);
+          words.forEach((word) => {
+            if (!word) return;
+            lineHTML += `<span class="title-word-wrapper">`;
+            for (let char of word) {
+              lineHTML += `<span class="title-char">${char}</span>`;
+            }
+            lineHTML += `</span> `;
+          });
+        } else if (node.nodeType === Node.ELEMENT_NODE) {
+          const isHighlight = node.classList.contains("text-highlight");
+          const words = node.textContent.split(/\s+/);
+          words.forEach((word) => {
+            if (!word) return;
+            lineHTML += `<span class="title-word-wrapper ${isHighlight ? 'text-highlight' : ''}">`;
+            for (let char of word) {
+              lineHTML += `<span class="title-char">${char}</span>`;
+            }
+            lineHTML += `</span> `;
+          });
+        }
+      });
+
+      lineHTML += `</div>`;
+      finalHTML += lineHTML + (lineIdx < lineStrings.length - 1 ? "<br>" : "");
+    });
+
+    title.innerHTML = finalHTML;
+  }
+
+  const desc = document.querySelector("#hero-section .hero-description");
+  if (desc) {
+    const rawText = desc.innerText.trim();
+    const words = rawText.split(/\s+/);
+    let finalHTML = "";
+    words.forEach((word) => {
+      finalHTML += `<span class="desc-word-mask"><span class="desc-word">${word}</span></span> `;
+    });
+    desc.innerHTML = finalHTML;
   }
 }
 

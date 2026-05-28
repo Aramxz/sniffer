@@ -9,7 +9,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Rajdhani:wght@500;600;700;800&family=Orbitron:wght@400;500;700;900&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
   <!-- CSS Stylesheet (Bypass Browser Cache) -->
   <link rel="stylesheet" href="styles.css?v=3.3">
 </head>
@@ -46,37 +46,27 @@
 
   <!-- Hero Section -->
   <section id="hero-section">
+    <!-- Glowing background elements -->
+    <div class="cyber-glow-1"></div>
+    <div class="cyber-glow-2"></div>
+    <canvas id="cyber-canvas"></canvas>
     <div class="hero-container">
       <div class="hero-content">
         <div class="badge-investor">
-          <span class="badge-dot"></span> MICROCONTROLADOR ESP32-PICO-D4 • MONITOREO INALÁMBRICO PORTÁTIL
+          [ ESP32-PICO-D4 // TACTICAL AUDITOR ]
         </div>
         <h1 class="hero-title">
-          Monitoreo Inalámbrico Portátil, <br>
-          <span class="gradient-text">En la Palma de tu Mano</span>
+          AUDITORÍA <br>
+          ELECTROMAGNÉTICA <br>
+          <span class="text-highlight">DE BOLSILLO</span>
         </h1>
         <p class="hero-description">
-          El <strong>LILYGO ESP32-PICO-D4 Sniffer</strong> es una plataforma de análisis inalámbrico de bolsillo. Diseñado para auditar y monitorear de forma pasiva redes WiFi de 2.4 GHz e identificar dispositivos Bluetooth Low Energy (BLE) cercanos como localizadores y trackers. Todo operado de forma autónoma mediante una red local generada por el propio dispositivo.
+          Un analizador físico compacto basado en el SoC ESP32-PICO-D4. Desarrollado para la detección, mapeo y registro silencioso de beacons WiFi, tramas Probe Requests y balizas de rastreo Bluetooth BLE. El sistema opera de forma air-gapped autónoma, capturando metadatos en crudo directamente del espacio radioeléctrico y sirviéndolos localmente a través de un portal web seguro embebido en el propio chip.
         </p>
         
         <div class="hero-buttons">
-          <a href="#simulator-section" class="btn btn-primary btn-glow">PROBAR SIMULADOR</a>
+          <a href="#simulator-section" class="btn btn-primary">PROBAR SIMULADOR</a>
           <a href="#anatomy-section" class="btn btn-secondary">VER HARDWARE</a>
-        </div>
-
-        <div class="hero-metrics">
-          <div class="metric-card">
-            <span class="metric-num">PICO-D4</span>
-            <span class="metric-lbl">Chip System-in-Package</span>
-          </div>
-          <div class="metric-card">
-            <span class="metric-num">2.4 GHz</span>
-            <span class="metric-lbl">WiFi & Bluetooth BLE</span>
-          </div>
-          <div class="metric-card">
-            <span class="metric-num">128x64 px</span>
-            <span class="metric-lbl">Pantalla OLED SSD1306</span>
-          </div>
         </div>
       </div>
 
@@ -187,7 +177,7 @@
               <rect x="212" y="346" width="5" height="4" fill="#111111" />
             </g>
 
-            <!-- 3. GPS MODULE (U-BLOX U10) -->
+            <!-- 3. GPS MODULE (u-blox NEO-6M) -->
             <g id="board-gps" class="device-layer">
               <!-- GPS Ceramic Patch Antenna -->
               <rect x="300" y="320" width="50" height="50" rx="6" fill="url(#gps-ant-grad)" stroke="#dcdcdc" stroke-width="1.5" />
@@ -248,8 +238,8 @@
   <!-- Sticky Interactive Anatomy Exploded Section -->
   <section id="anatomy-section">
     <div class="section-title-wrap">
-      <h2 class="section-subtitle">INGENIERÍA E INTEGRACIÓN</h2>
-      <h2 class="section-title">Anatomía del Hardware</h2>
+      <h2 class="section-subtitle scramble-word" data-text="INGENIERÍA E INTEGRACIÓN">INGENIERÍA E INTEGRACIÓN</h2>
+      <h2 class="section-title scramble-word" data-text="Anatomía del Hardware">Anatomía del Hardware</h2>
       <p class="section-lead">Desmontamos el hardware del Sentinel-32 para mostrarte cómo se integran la antena de captura pasiva, la pantalla de telemetría y el microprocesador en un diseño ultra-compacto de bolsillo. Desplázate para inspeccionar cada capa.</p>
     </div>
 
@@ -305,7 +295,7 @@
                 <rect x="300" y="320" width="50" height="50" rx="6" fill="url(#gps-ant-grad)" stroke="#dcdcdc" stroke-width="1.5" />
                 <rect x="310" y="330" width="30" height="30" rx="2" fill="#696969" stroke="#b87333" stroke-width="2" />
                 <circle cx="325" cy="345" r="4" fill="#fff" />
-                <text x="325" y="377" font-family="Orbitron" font-size="7" fill="#ffb732" text-anchor="middle" font-weight="bold">GPS</text>
+                <text x="325" y="377" font-family="Orbitron" font-size="6" fill="#ffb732" text-anchor="middle" font-weight="bold">NEO-6M</text>
               </g>
 
               <!-- SoC ESP32 -->
@@ -326,7 +316,9 @@
               </g>
             </svg>
           </div>
-            <div class="anatomy-scroll-right">
+        </div>
+      </div>
+      <div class="anatomy-scroll-right">
         <!-- Step 1: Base PCB -->
         <div class="anatomy-step" id="step-pcb">
           <div class="step-num">01</div>
@@ -372,14 +364,14 @@
         <!-- Step 4: GPS Module UART -->
         <div class="anatomy-step" id="step-gps">
           <div class="step-num">04</div>
-          <h3 class="step-title">Módulo Receptor Satelital GPS</h3>
+          <h3 class="step-title">Módulo Receptor Satelital GPS NEO-6M</h3>
           <p class="step-desc">
-            Módulo satelital de alta ganancia conectado a la interfaz UART. Permite georreferenciar las coordenadas exactas de las señales WiFi o Bluetooth capturadas en tiempo real para análisis de cobertura geográfica.
+            Módulo satelital u-blox NEO-6M de alto rendimiento conectado a la interfaz UART. Permite georreferenciar las coordenadas exactas de las señales WiFi o Bluetooth capturadas en tiempo real para realizar mapas de cobertura geográfica precisos.
           </p>
           <div class="tech-spec-grid">
-            <span class="spec-label">Localización:</span><span class="spec-val">GPS / GLONASS / Galileo</span>
+            <span class="spec-label">Chipset:</span><span class="spec-val">u-blox NEO-6M GPS</span>
             <span class="spec-label">Conexión:</span><span class="spec-val">UART Directa (RX: IO13 / TX: IO12)</span>
-            <span class="spec-label">Antena:</span><span class="spec-val">Antena activa integrada</span>
+            <span class="spec-label">Antena:</span><span class="spec-val">Antena cerámica de alta sensibilidad</span>
           </div>
         </div>
 
@@ -402,9 +394,9 @@
   <!-- Deep-Tech Features Section -->
   <section id="features-section">
     <div class="section-title-wrap text-center">
-      <h2 class="section-subtitle">ANÁLISIS INALÁMBRICO PASIVO</h2>
-      <h2 class="section-title">Módulos de Monitoreo de Red</h2>
-      <p class="section-lead max-w-600">Tres tecnologías de escaneo integradas de forma autónoma en el microcontrolador ESP32-PICO-D4.</p>
+      <h2 class="section-subtitle scramble-word" data-text="ANÁLISIS INALÁMBRICO PASIVO">ANÁLISIS INALÁMBRICO PASIVO</h2>
+      <h2 class="section-title scramble-word" data-text="Módulos de Intercepción de RF">Módulos de Intercepción de RF</h2>
+      <p class="section-lead max-w-600">Tres vectores de análisis táctico operando de forma autónoma y simultánea a nivel de silicio en el ESP32-PICO-D4.</p>
     </div>
 
     <div class="features-linear-list">
@@ -500,9 +492,9 @@
   <section id="simulator-section">
     <div class="simulator-showcase-container">
       <div class="section-title-wrap text-center">
-        <h2 class="section-subtitle">PORTAL WEB LOCAL EN VIVO</h2>
-        <h2 class="section-title">Explora la Interfaz del Sniffer</h2>
-        <p class="section-lead max-w-600">Simulación interactiva del portal web generado por el chip ESP32. El dispositivo crea su propia red local WiFi para que revises los datos capturados en tiempo real desde tu celular.</p>
+        <h2 class="section-subtitle scramble-word" data-text="PORTAL WEB LOCAL EN VIVO">PORTAL WEB LOCAL EN VIVO</h2>
+        <h2 class="section-title scramble-word" data-text="Consola Remota Air-Gapped">Consola Remota Air-Gapped</h2>
+        <p class="section-lead max-w-600">Interactúa con la interfaz web servida directamente por el procesador ESP32. El dispositivo crea un hotspot WiFi local aislado de internet para una auditoría segura de espectro en campo.</p>
       </div>
 
       <!-- Pristine Smartphone Mockup Centered -->
@@ -622,9 +614,9 @@
   <!-- Ecosistema y Robustez Técnica (Linear Showcase) -->
   <section id="pitch-section">
     <div class="section-title-wrap text-center">
-      <h2 class="section-subtitle">SISTEMA 100% AUTÓNOMO</h2>
-      <h2 class="section-title">Análisis Inalámbrico Descentralizado</h2>
-      <p class="section-lead max-w-600">Un diseño práctico y sin dependencias. Operación totalmente local sin servidores centrales ni almacenamiento de telemetría.</p>
+      <h2 class="section-subtitle scramble-word" data-text="SISTEMA AIR-GAPPED HABILITADO">SISTEMA AIR-GAPPED HABILITADO</h2>
+      <h2 class="section-title scramble-word" data-text="Auditoría Inalámbrica Descentralizada">Auditoría Inalámbrica Descentralizada</h2>
+      <p class="section-lead max-w-600">Diseño enfocado a la privacidad operacional absoluta. Cero servicios en la nube, cero telemetría externa y procesamiento 100% local en hardware físico.</p>
     </div>
 
     <div class="ecosystem-linear-list">
@@ -682,9 +674,9 @@
       <div class="badge-investor" style="align-self: center; margin-bottom: 1.5rem;">
         <span class="badge-dot pulsing-green"></span> RESERVAR KIT / SOLICITAR INFORMACIÓN
       </div>
-      <h2 class="form-title text-center">Obtén tu ESP32 Sniffer</h2>
+      <h2 class="form-title text-center scramble-word" data-text="Adquirir Hardware de Campo">Adquirir Hardware de Campo</h2>
       <p class="form-lead text-center">
-        ¿Quieres auditar coberturas, probar tu propio hardware o flashear el firmware? Completa el formulario para reservar tu kit pre-ensamblado o solicitar el firmware de inicio rápido y las guías de ensamblaje técnico.
+        ¿Deseas auditar redes en entornos profesionales, flashear tu propia placa de pruebas o adquirir el módulo ensamblado? Completa el registro para obtener las guías de firmware, esquemas de hardware y opciones del kit físico.
       </p>
 
       <form id="invest-form" onsubmit="event.preventDefault(); alert('¡Solicitud registrada con éxito! Te enviaremos el catálogo del kit pre-ensamblado, el firmware y las guías de inicio técnico a tu correo.');">
